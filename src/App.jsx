@@ -1,23 +1,23 @@
 import { useState } from 'react'
 import reactLogo from './assets/react.svg'
-
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import HomePage from './pages/HomePage';
 import './App.css'
+import Header from './layout/Header';
+import AboutPage from './pages/AboutPage';
 
 
 function App() {
-  const [count, setCount] = useState(0)
+  
 
   return (
-    <div id='app' className="flex justify-center items-center  ">
-    
-    
-        
-
-
-      <p className=" text-[50px] text-red-500">
-        E-commerce Website Project will be build here
-      </p>
-    </div>
+    <Router>
+      <Header />
+      <Switch>
+        <Route exact path="/" component={HomePage} />
+        <Route path="/about" component={AboutPage} />
+      </Switch>
+    </Router>
   )
 }
 
