@@ -8,7 +8,7 @@ import {
 
 export default function Footer() {
   return (
-    <div>
+    <div className="font-montserrat">
       <section className="flex flex-col gap-y-3 md:flex-row md:gap-x-4 bg-[#FAFAFA] md:justify-between font-bold px-[14%] py-10 mt-10">
         <span className="text-[#252B42]">Bandage</span>
         <div className="flex gap-4">

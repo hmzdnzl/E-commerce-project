@@ -23,7 +23,7 @@ export default function Header() {
     <div className="w-full flex-col flex md:justify-center">
       <section
         id="contact-info"
-        className="hidden md:flex md:justify-between md:w-full font-bold items-center py-3 px-10 md:bg-[#252B42] "
+        className="hidden md:flex md:justify-between md:w-full font-bold font-montserrat items-center py-3 px-10 md:bg-[#252B42] "
       >
         <div id="contact-infos-wrapper" className="hidden md:flex gap-8">
           <div id="phone" className="hidden md:flex md:items-center md:gap-2 ">
@@ -68,7 +68,7 @@ export default function Header() {
       <a className="hover:text-[#252B42]" href="/prices">Prices</a>
       </nav>
       <section className="flex gap-6" >
-      <div className=" hidden md:flex gap-2 ">
+      <div className=" hidden md:flex gap-2 font-montserrat">
         <a className="flex text-[#23A6F0] items-center gap-2" href="/login">
         <User size={24}  className="text-[#23A6F0] h-4 w-4" />
         Login      

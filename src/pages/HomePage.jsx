@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
-
+import Categories from "../layout/categories";
+import ProductCards from "../layout/productCards";
 
 export default function HomePage() {
   const slides = useSelector((state) => state.slider.slides);
@@ -14,17 +15,63 @@ export default function HomePage() {
     }
   }
 
-  const settings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    arrows: true,
-  };
-
   return (
-    <div className="w-full overflow-hidden relative">     
+    <section>
+      <div
+        className={`w-full h-[716px] relative font-montserrat bg-cover bg-center items-center bg-no-repeat flex flex-col ${
+          currentSlide === slides.herofirst.image
+            ? "md:items-end"
+            : "md:items-start"
+        } justify-center`}
+        style={{ backgroundImage: `url(${currentSlide})` }}
+      >
+        <div className="flex flex-col items-center justify-center w-[55%] z-10">
+          <h1 className="text-[16px] font-bold text-white flex text-center z-10 mb-2">
+            {currentSlide === slides.herofirst.image
+              ? slides.herofirst.title
+              : slides.herosecond.title}
+          </h1>
+          <h2 className="md:text-[58px] text-[40px] font-bold text-center text-white z-10 mb-2">
+            {currentSlide === slides.herofirst.image
+              ? slides.herofirst.subtitle
+              : slides.herosecond.subtitle}
+          </h2>
+          <p className="text-[20px] text-white z-10 w-1/3 mb-4">
+            {currentSlide === slides.herofirst.image
+              ? slides.herofirst.description
+              : slides.herosecond.description}
+          </p>
+          <button className="text-[24px] bg-[#2DC071] w-[221px] h-[62px] text-white px-6 py-3 rounded-[5px]  font-bold z-10 hover:bg-[#1b82c9] transition mb-6">
+            SHOP NOW
+          </button>
+        </div>
+        <div className="w-full absolute flex justify-between px-4">
+          <button
+            onClick={changeSlide}
+            className="text-6xl text-white p-2 rounded-full z-10 shadow cursor-pointer"
+            aria-label="Previous slide"
+          >
+            {"<"}
+          </button>
+          <button
+            onClick={changeSlide}
+            className="text-6xl text-white p-2 rounded-full z-10 shadow cursor-pointer"
+            aria-label="Next slide"
+          >
+            {">"}
+          </button>
+        </div>
+      </div>
+      <Categories />
+      <ProductCards />
+    </section>
+  );
+}
+
+{
+  /*
+  
+<div className="w-full overflow-hidden relative">     
 
       <img
         src={currentSlide}
@@ -47,7 +94,6 @@ export default function HomePage() {
         {">"}
       </button>
     </div>
-  );
+
+  */
 }
-
-
