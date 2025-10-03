@@ -80,8 +80,8 @@ export default function Footer() {
         </div>
         <div className="flex flex-col gap-y-1">
           <h1 className="text-[#252B42] font-bold">Get In Touch</h1>
-          <form className="flex border border-[#E6E6E6] bg-[#F9F9F9]">
-            <input type="email" placeholder="Your Email" />
+          <form className="flex border border-[#E6E6E6] bg-[#F9F9F9] w-[80%]">
+            <input className="w-[80%]" type="email" placeholder="Your Email" />
             <button className="bg-[#23A6F0] p-2.5 text-white" type="submit">
               Subscribe
             </button>

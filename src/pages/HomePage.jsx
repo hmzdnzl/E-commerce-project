@@ -2,6 +2,10 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import Categories from "../layout/categories";
 import ProductCards from "../layout/productCards";
+import ProductSlider from "../layout/productSlider";
+import AdvicedProduct from "../layout/advicedProduct";
+import FeaturedProducts from "../layout/FeaturedProducts";
+
 
 export default function HomePage() {
   const slides = useSelector((state) => state.slider.slides);
@@ -17,6 +21,7 @@ export default function HomePage() {
 
   return (
     <section>
+      <header >
       <div
         className={`w-full h-[716px] relative font-montserrat bg-cover bg-center items-center bg-no-repeat flex flex-col ${
           currentSlide === slides.herofirst.image
@@ -36,7 +41,7 @@ export default function HomePage() {
               ? slides.herofirst.subtitle
               : slides.herosecond.subtitle}
           </h2>
-          <p className="text-[20px] text-white z-10 w-1/3 mb-4">
+          <p className="text-[20px] text-white flex text-center z-10 w-2/3 md:w-1/2 mb-4">
             {currentSlide === slides.herofirst.image
               ? slides.herofirst.description
               : slides.herosecond.description}
@@ -44,6 +49,10 @@ export default function HomePage() {
           <button className="text-[24px] bg-[#2DC071] w-[221px] h-[62px] text-white px-6 py-3 rounded-[5px]  font-bold z-10 hover:bg-[#1b82c9] transition mb-6">
             SHOP NOW
           </button>
+          <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex justify-center items-center z-20">
+            <div className={`bg-white w-[62px] h-[10px]  ${currentSlide === slides.herosecond.image ? "opacity-50" : ""}`}></div>
+            <div className={`bg-white w-[62px] h-[10px]  ${currentSlide === slides.herofirst.image ? "opacity-50" : ""}`}></div>
+          </div>
         </div>
         <div className="w-full absolute flex justify-between px-4">
           <button
@@ -60,10 +69,16 @@ export default function HomePage() {
           >
             {">"}
           </button>
-        </div>
+        </div>       
       </div>
+    
+       </header>
       <Categories />
       <ProductCards />
+      <ProductSlider />
+      <AdvicedProduct />      
+      <FeaturedProducts />
+
     </section>
   );
 }
