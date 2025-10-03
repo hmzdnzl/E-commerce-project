@@ -1,5 +1,5 @@
 import React from "react";
-import { Phone, Mail, User, Search, ShoppingCart, Heart, Menu } from "lucide-react";
+import { Phone, Mail, User, Search, ShoppingCart, Heart, Menu, ChevronDown } from "lucide-react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faFacebook,
@@ -60,12 +60,36 @@ export default function Header() {
       <section className="flex justify-between items-center px-10 py-5">
       <a className="text-[#252B42] text-[24px] font-bold" href="/">Bandage</a>
       <nav className="space-x-4 hidden text-[14px] md:flex items-center font-montserrat font-bold  text-[#737373]">
-      <a className="hover:text-[#252B42]" href="/">Home</a>
-      <a className="hover:text-[#252B42]" href="/shop">Shop</a>      
-      <a className="hover:text-[#252B42]" href="/about">About</a>
-      <a className="hover:text-[#252B42]" href="/blog">Blog</a>
-      <a className="hover:text-[#252B42]" href="/contact">Contact</a>
-      <a className="hover:text-[#252B42]" href="/prices">Prices</a>
+        <a className="hover:text-[#252B42]" href="/">Home</a>
+        <div className="relative group inline-block">
+          <a className="hover:text-[#252B42] flex items-center cursor-pointer" href="/shop">Shop<ChevronDown className="w-4 h-4" /></a>
+          <div className="absolute left-0 top-full w-80 bg-white shadow-lg rounded z-50 flex flex-row gap-6 p-4
+            opacity-0 group-hover:opacity-100 hover:opacity-100
+            pointer-events-none group-hover:pointer-events-auto hover:pointer-events-auto
+            transition-opacity duration-200">
+            <div className="flex flex-col min-w-[100px]">
+              <span className="font-bold text-[#252B42] px-2 mb-2">Kadın</span>
+              <a href="/shop/" className="px-2 py-2 hover:bg-gray-100 rounded">Bags</a>
+              <a href="/shop/" className="px-2 py-2 hover:bg-gray-100 rounded">Belts</a>
+              <a href="/shop/" className="px-2 py-2 hover:bg-gray-100 rounded">Cosmetics</a>
+              <a href="/shop/" className="px-2 py-2 hover:bg-gray-100 rounded">Bags</a>
+              <a href="/shop/" className="px-2 py-2 hover:bg-gray-100 rounded">Hats</a>
+            </div>
+            <div className="flex flex-col min-w-[100px]">
+              <span className="font-bold text-[#252B42] px-2 mb-2">Erkek</span>
+               <a href="/shop/" className="px-2 py-2 hover:bg-gray-100 rounded">Bags</a>
+              <a href="/shop/" className="px-2 py-2 hover:bg-gray-100 rounded">Belts</a>
+              <a href="/shop/" className="px-2 py-2 hover:bg-gray-100 rounded">Cosmetics</a>
+              <a href="/shop/" className="px-2 py-2 hover:bg-gray-100 rounded">Bags</a>
+              <a href="/shop/" className="px-2 py-2 hover:bg-gray-100 rounded">Hats</a>
+            </div>
+          </div>
+          
+        </div>
+        <a className="hover:text-[#252B42]" href="/about">About</a>
+        <a className="hover:text-[#252B42]" href="/blog">Blog</a>
+        <a className="hover:text-[#252B42]" href="/contact">Contact</a>
+        <a className="hover:text-[#252B42]" href="/prices">Prices</a>
       </nav>
       <section className="flex gap-6" >
       <div className=" hidden md:flex gap-2 font-montserrat">

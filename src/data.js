@@ -18,6 +18,11 @@ import advicedImg from './assets/advicedProduct/adviced.png';
 import featuredimg1 from './assets/featuredProducts/featured-1.jpg';
 import featuredimg2 from './assets/featuredProducts/featured-2.jpg';
 import featuredimg3 from './assets/featuredProducts/featured-3.jpg';
+import categoriesCard1 from './assets/shopCategories/card-cover1.jpg';
+import categoriesCard2 from './assets/shopCategories/card-cover2.jpg';
+import categoriesCard3 from './assets/shopCategories/card-cover3.jpg';
+import categoriesCard4 from './assets/shopCategories/card-cover4.jpg';
+import categoriesCard5 from './assets/shopCategories/card-cover5.jpg';
 
 
 export const Data = {
@@ -70,5 +75,12 @@ export const Data = {
     description: "We focus on ergonomics and meeting you where you work. It's only a keystroke away.", date:"22 September 2025", comments: "10 Comments" },
     { id: 3, image: featuredimg3, tab1:"Google", tab2:"Trending", tab3:"New", title: "Loudest à la Madison #1 (L'integral)", 
     description: "We focus on ergonomics and meeting you where you work. It's only a keystroke away.", date:"22 September 2025", comments: "10 Comments" },
-]
+],
+  shopCategories: [
+    { id: 1, image: categoriesCard5, title: "CLOTHS", item:"5 Items"},
+    { id: 2, image: categoriesCard4, title: "CLOTHS", item:"5 Items"},
+    { id: 3, image: categoriesCard3, title: "CLOTHS", item:"5 Items"},
+    { id: 4, image: categoriesCard2, title: "CLOTHS", item:"5 Items"},
+    { id: 5, image: categoriesCard1, title: "CLOTHS", item:"5 Items"},
+  ],
 }
