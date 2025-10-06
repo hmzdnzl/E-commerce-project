@@ -14,7 +14,7 @@ export default function ProductCards() {
         </p>
       </header>
       <section className="w-full flex items-center justify-center">
-        <div className="flex justify-center flex-wrap w-[60%]">
+        <div className="flex justify-center flex-wrap md:w-[65%] w-[60%]">
           {products.map((product) => (
             <div
               key={product.id}

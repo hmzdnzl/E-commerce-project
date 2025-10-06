@@ -7,6 +7,9 @@ import productSliderReducer from '../reducers/productSliderReducer';
 import advicedProductReducer from '../reducers/advicedProductReducer';
 import featuredReducer from '../reducers/featuredReducer';
 import { shopCategoriesReducer } from '../reducers/shopCategoriesReducer';
+import { shopProductsReducer } from '../reducers/shopProductsReducer';
+import brandsReducer  from '../reducers/brandsReducer';
+import { contactReducer } from '../reducers/contactReducer';
 
 const rootReducer = combineReducers({
   menu: menuReducer,
@@ -17,6 +20,9 @@ const rootReducer = combineReducers({
   products: productCardsReducer,
   productSlider: productSliderReducer,
   featured:featuredReducer,
+  shopProducts: shopProductsReducer,
+  brands: brandsReducer,
+  contact: contactReducer,
 });
 
 const store = createStore(rootReducer);

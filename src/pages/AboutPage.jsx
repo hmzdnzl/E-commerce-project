@@ -1,10 +1,8 @@
-import React from "react";
-
-export default function AboutPage() {
+export default function ContactPage() {
   return (
     <div>
-      
-      <p>This is the about page of the E-commerce website.</p>
+      <h1>ABOUT Us</h1>
+
     </div>
   );
 }
