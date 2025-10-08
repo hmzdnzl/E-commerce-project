@@ -10,6 +10,7 @@ import { shopCategoriesReducer } from '../reducers/shopCategoriesReducer';
 import { shopProductsReducer } from '../reducers/shopProductsReducer';
 import brandsReducer  from '../reducers/brandsReducer';
 import { contactReducer } from '../reducers/contactReducer';
+import ProductDetailReducer from '../reducers/productDetailReducer';
 
 const rootReducer = combineReducers({
   menu: menuReducer,
@@ -23,6 +24,7 @@ const rootReducer = combineReducers({
   shopProducts: shopProductsReducer,
   brands: brandsReducer,
   contact: contactReducer,
+  productDetail: ProductDetailReducer
 });
 
 const store = createStore(rootReducer);

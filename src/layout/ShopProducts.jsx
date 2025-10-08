@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 export default function ShopProducts(props) {
   const { desktopPiece, setDesktopPiece, mobilePiece, setMobilePiece } = props;
@@ -47,13 +48,13 @@ export default function ShopProducts(props) {
           key={product.id}
           className=" my-12 mx-3 md:hidden flex flex-col items-center font-montserrat "
         >
-          <a href="#">
+          <Link to="/shop/detail">
             <img
               src={product.image}
               alt={product.name}
               className="rounded-t-lg w-[239px] h-[427px] object-cover"
             />
-          </a>
+          </Link>
           <div className="p-4 flex flex-col items-center gap-y-2">
             <h5 className="text-lg font-bold">{product.name}</h5>
             <p className="text-gray-500">{product.name2}</p>
@@ -118,13 +119,13 @@ export default function ShopProducts(props) {
             key={product.id}
             className=" my-12 mx-3 hidden md:flex md:flex-col md:items-center font-montserrat "
           >
-            <a href="#">
+            <Link to="/shop/detail">
               <img
                 src={product.image}
                 alt={product.name}
                 className="rounded-t-lg w-[239px] h-[427px] md:w-[239px] md:h-[300px] object-cover"
               />
-            </a>
+            </Link>
             <div className="p-4 flex flex-col items-center gap-y-2">
               <h5 className="text-lg font-bold">{product.name}</h5>
               <p className="text-gray-500">{product.name2}</p>

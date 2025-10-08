@@ -41,6 +41,9 @@ import brand3 from "./assets/brands/Brand3.png";
 import brand4 from "./assets/brands/Brand4.png";
 import brand5 from "./assets/brands/Brand5.png";
 import brand6 from "./assets/brands/Brand6.png";
+import koltuk from "./assets/shopDetails/koltuk.jpg";
+import sandalye from "./assets/shopDetails/sandalye.jpg";
+
 
 export const Data = {
   sliderSection: {
@@ -316,6 +319,34 @@ export const Data = {
     {
       email1: "georgia.young@example.com",
       email2: "georgia.young@ple.com",
+    },
+  ],
+  shopDetails: [
+    {
+      id: 1,
+      image: koltuk,
+      title: "Floating Sofa",
+      comment:"10 Reviews",
+      price:"$1,139.33",
+      stockStatus:"In Stock",
+      description: `Met minim Mollie non desert 
+Alamo est sit cliquey dolor do 
+met sent. RELIT official consequent 
+door ENIM RELIT Mollie. Excitation 
+venial consequent sent nostrum met.`,
+    },
+    {
+      id: 2,
+      image: sandalye,
+      title: "Floating Chair",
+      comment:"11 Reviews",
+      price:"$1,139.33",
+      stockStatus:"In Stock",
+      description: `Met minim Mollie non desert 
+Alamo est sit cliquey dolor do 
+met sent. RELIT official consequent 
+door ENIM RELIT Mollie. Excitation 
+venial consequent sent nostrum met.`,
     },
   ],
 };
