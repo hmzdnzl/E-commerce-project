@@ -1,3 +1,4 @@
+import BestSeller from "../layout/bestSeller";
 import Brands from "../layout/Brands";
 import ProductDetail from "../layout/productDetail";
 import { useState } from "react";
@@ -7,6 +8,7 @@ export default function ProductDetails() {
 
   return (
     <div>
+      <div className="bg-[#FAFAFA]">
         <section className="md:flex md:mx-auto md:justify-end md:w-[70%] gap-y-10 flex flex-col">
         
 
@@ -24,7 +26,9 @@ export default function ProductDetails() {
           </span>
         </div>
       </section>
+      </div>
       <ProductDetail productName={productName} setProductName={setProductName} />
+      <BestSeller />
       <Brands />
     </div>
 

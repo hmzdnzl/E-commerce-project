@@ -11,6 +11,7 @@ import { shopProductsReducer } from '../reducers/shopProductsReducer';
 import brandsReducer  from '../reducers/brandsReducer';
 import { contactReducer } from '../reducers/contactReducer';
 import ProductDetailReducer from '../reducers/productDetailReducer';
+import bestSellerReducer from '../reducers/bestSellerReducer';
 
 const rootReducer = combineReducers({
   menu: menuReducer,
@@ -24,7 +25,8 @@ const rootReducer = combineReducers({
   shopProducts: shopProductsReducer,
   brands: brandsReducer,
   contact: contactReducer,
-  productDetail: ProductDetailReducer
+  productDetail: ProductDetailReducer,
+  bestSellers: bestSellerReducer
 });
 
 const store = createStore(rootReducer);

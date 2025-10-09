@@ -43,6 +43,16 @@ import brand5 from "./assets/brands/Brand5.png";
 import brand6 from "./assets/brands/Brand6.png";
 import koltuk from "./assets/shopDetails/koltuk.jpg";
 import sandalye from "./assets/shopDetails/sandalye.jpg";
+import descriptionImage from "./assets/shopDetails/description.jpg";
+import image1 from "./assets/bestSellers/image1.jpg";
+import image2 from "./assets/bestSellers/image2.jpg";
+import image3 from "./assets/bestSellers/image3.jpg";
+import image4 from "./assets/bestSellers/image4.jpg";
+import image5 from "./assets/bestSellers/image5.jpg";
+import image6 from "./assets/bestSellers/image6.jpg";
+import image7 from "./assets/bestSellers/image7.jpg";
+import image8 from "./assets/bestSellers/image8.jpg";
+
 
 
 export const Data = {
@@ -347,6 +357,86 @@ Alamo est sit cliquey dolor do
 met sent. RELIT official consequent 
 door ENIM RELIT Mollie. Excitation 
 venial consequent sent nostrum met.`,
+    },
+    {    id: 3,
+    image: descriptionImage,
+    title: "the quick fox jumps over ",
+    description: `Met minim Mollie non desert Alamo est sit cliquey dolor do met sent. RELIT official consequent door ENIM RELIT Mollie. Excitation venial consequent sent nostrum met.`,
+title2: "the quick fox jumps over ",
+title3: "the quick fox jumps over ",
+list1:["the quick fox jumps over the lazy dog",
+"the quick fox jumps over the lazy dog",
+"the quick fox jumps over the lazy dog",
+"the quick fox jumps over the lazy dog"],
+  list2:["the quick fox jumps over the lazy dog",
+"the quick fox jumps over the lazy dog",
+"the quick fox jumps over the lazy dog",]
+},
+  ], 
+  bestSellers:[
+    {
+      id: 1,
+      image: image1,
+      name: "Graphic Design",
+      name2: "English Department",
+      price1: "$16.48",
+      price2: "$6.48",
+    },
+    {
+      id: 2,
+      image: image2,
+      name: "Graphic Design",
+      name2: "English Department",
+      price1: "$16.48",
+      price2: "$6.48",
+    },
+    {
+      id: 3,
+      image: image3,
+      name: "Graphic Design",
+      name2: "English Department",
+      price1: "$16.48",
+      price2: "$6.48",
+    },
+    {
+      id: 4,
+      image: image4,
+      name: "Graphic Design",
+      name2: "English Department",
+      price1: "$16.48",
+      price2: "$6.48",
+    },
+    {
+      id: 5,
+      image: image5,
+      name: "Graphic Design",
+      name2: "English Department",
+      price1: "$16.48",
+      price2: "$6.48",
+    },
+    {
+      id: 6,
+      image: image6,
+      name: "Graphic Design",
+      name2: "English Department",
+      price1: "$16.48",
+      price2: "$6.48",
+    },
+    {
+      id: 7,
+      image: image7,
+      name: "Graphic Design",
+      name2: "English Department",
+      price1: "$16.48",
+      price2: "$6.48",
+    },
+    {
+      id: 8,
+      image: image8,
+      name: "Graphic Design",
+      name2: "English Department",
+      price1: "$16.48",
+      price2: "$6.48",
     },
   ],
 };

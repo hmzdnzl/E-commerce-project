@@ -34,10 +34,12 @@ export default function ProductDetail(props) {
   }, [selectedImage, productDetails, setProductName]);
 
   return (
-    <div className="w-[90%] mx-auto font-montserrat">
+    <div className="w-[90%] mx-auto font-montserrat md:w-[100%] ">
+      <div className="md:bg-[#FAFAFA] mb-5 pb-10">
+      <div className="md:flex md:justify-center md:gap-x-10">
       <div className="flex flex-col gap-y-8 ">
         <section
-          className="w-full h-[277px] bg-cover flex justify-between bg-center bg-no-repeat"
+          className="md:w-[506px] md:h-[450px] w-full h-[277px] bg-cover flex justify-between bg-center bg-no-repeat"
           style={{ backgroundImage: `url(${selectedImage})` }}
         >
           <button
@@ -55,7 +57,7 @@ export default function ProductDetail(props) {
         </section>
 
         <section className="flex gap-x-4">
-          {productDetails.map((product) => (
+          {productDetails.map((product) => ( product.id !== 3) && (
             <div key={product.id}>
               <img
                 className="w-[100px] h-[75px] object-cover object-center object-no-repeat"
@@ -66,8 +68,8 @@ export default function ProductDetail(props) {
           ))}
         </section>
       </div>
-      <section className="flex flex-col gap-y-8">
-        <h1>{productName}</h1>
+      <section className="flex flex-col pl-5 mt-5 gap-y-9 mb-[100px]">
+        <h1 className="text-[20px] text-[#252B42]">{productName}</h1>
         <nav className="flex items-center gap-x-2">
           <div className="flex gap-x-1 text-[#F3CD03]">
             <FontAwesomeIcon icon={faStarSolid} />
@@ -75,7 +77,6 @@ export default function ProductDetail(props) {
             <FontAwesomeIcon icon={faStarSolid} />
             <FontAwesomeIcon icon={faStarSolid} />
             <FontAwesomeIcon icon={faStarRegular} />
-            
           </div>
           <p className="font-bold text-[14px] text-[#737373]">
             {selectedImage === productDetails[0].image
@@ -100,13 +101,13 @@ export default function ProductDetail(props) {
             </p>
           </div>
         </nav>
-        <p className="text-[#858585] text-[14px] w-[251px] ">
+        <p className="text-[#858585] text-[14px] w-[271px] md:w-[464px] ">
           {selectedImage === productDetails[0].image
             ? productDetails[0].description
             : productDetails[1].description}
         </p>
-        <div className="flex mt-[-15px] justify-center">
-          <div className="w-[283px] items-center flex h-[1px] bg-[#BDBDBD]"></div>
+        <div className="flex pl-3 mt-[-15px] justify-start">
+          <div className="md:w-[445px] w-[283px] md:flex md:items-center flex h-[1px] bg-[#BDBDBD]"></div>
         </div>
         <section className="flex gap-x-2 mt-[-15px]">
           <div className="w-[30px] h-[30px] rounded-full bg-[#23A6F0]"></div>
@@ -118,10 +119,71 @@ export default function ProductDetail(props) {
           <button className="bg-[#23A6F0] text-[#FFFFFF] w-[148px] h-[44px] text-[14px] font-bold px-4 py-2 rounded-[5px]">
             Select Options
           </button>
-         <button className="w-[40px] h-[40px] rounded-full bg-[#FFFFFF] border flex items-center justify-center border-[#E8E8E8]"><FontAwesomeIcon icon={faHeartRegular} className="text-[#000000]" /></button>
-           <button className="w-[40px] h-[40px] rounded-full bg-[#FFFFFF] border flex items-center justify-center text-[#000000] border-[#E8E8E8]"><ShoppingCart /></button>
-            <button className="w-[40px] h-[40px] rounded-full bg-[#FFFFFF] border border-[#E8E8E8] text-[#000000]"><FontAwesomeIcon icon={faEye} /> </button>
+          <button className="w-[40px] h-[40px] rounded-full bg-[#FFFFFF] border flex items-center justify-center border-[#E8E8E8]">
+            <FontAwesomeIcon icon={faHeartRegular} className="text-[#000000]" />
+          </button>
+          <button className="w-[40px] h-[40px] rounded-full bg-[#FFFFFF] border flex items-center justify-center text-[#000000] border-[#E8E8E8]">
+            <ShoppingCart />
+          </button>
+          <button className="w-[40px] h-[40px] rounded-full bg-[#FFFFFF] border border-[#E8E8E8] text-[#000000]">
+            <FontAwesomeIcon icon={faEye} />{" "}
+          </button>
         </nav>
+      </section>
+      </div>
+      </div>
+      <section className=" md:w-[53%] mx-auto flex flex-col gap-y-8">
+        <nav className="flex gap justify-around md:flex md:justify-center md:gap-x-10">
+          <a className="text-[#737373] font-[600] underline text-[14px]" href="">
+            Description
+          </a>
+          <a className="text-[#737373] font-bold  text-[14px]" href="">
+            Additional Information
+          </a>
+          <a className="text-[#737373] font-bold  text-[14px]" href="">
+            Reviews <span className="text-[#23856D]">(0)</span>
+          </a>
+        </nav>
+        <div className="w-[100%] hidden md:flex h-[1px] mx-auto bg-[#ECECEC]"></div>
+        <section className="md:flex md:justify-between">
+        <div className=" ">
+          <img className="md:w-[316px] md:h-[372px] md:object-cover md:object-center md:object-no-repeat" src={productDetails[2].image} alt="" />
+        </div>
+        <div>
+        <h1 className="text-[24px] font-bold text-[#252B42]">
+          {productDetails[2].title}          
+        </h1>
+        <nav className="flex flex-col md:flex md:flex-col md:w-[320px] gap-y-6 text-[#737373] text-[14px] font-[400]">
+          <p>{productDetails[2].description}</p>
+           <p>{productDetails[2].description}</p>
+            <p>{productDetails[2].description}</p>          
+        </nav>
+        </div>
+        <section className="md:flex md:flex-col md:gap-y-10">
+        <div className="flex flex-col gap-y-4">
+          <h2 className="text-[24px] font-bold text-[#252B42]">{productDetails[2].title2}</h2>
+          <ul className="flex flex-col gap-y-2">
+           {productDetails[2].list1.map((item, index) => (
+            <li key={index} className="flex items-center text-[#737373] text-[14px] leading-[24px] tracking-[0.2px] font-bold gap-x-2">
+              <span className="text-[#737373] font-normal mr-3">{'>'}</span>
+              {item}
+            </li>
+           ))}
+          </ul>
+          </div>
+           <div className="flex flex-col gap-y-4">
+          <h2 className="text-[24px] font-bold text-[#252B42]">{productDetails[2].title3}</h2>
+          <ul className="flex flex-col gap-y-2">
+           {productDetails[2].list2.map((item, index) => (
+            <li key={index} className="flex items-center text-[#737373] text-[14px] leading-[24px] tracking-[0.2px] font-bold gap-x-2">
+              <span className="text-[#737373] font-normal mr-3">{'>'}</span>
+              {item}
+            </li>
+           ))}
+          </ul>
+          </div>
+          </section>
+</section>
       </section>
     </div>
   );
