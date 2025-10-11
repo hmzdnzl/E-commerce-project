@@ -34,10 +34,11 @@ export default function ProductDetail(props) {
   }, [selectedImage, productDetails, setProductName]);
 
   return (
-    <div className="w-[90%] mx-auto font-montserrat md:w-[100%] ">
-      <div className="md:bg-[#FAFAFA] mb-5 pb-10">
+    <div className="w-full mx-auto font-montserrat md:w-[100%] ">
+      <div className="bg-[#FAFAFA]  mb-1 pb-1">
       <div className="md:flex md:justify-center md:gap-x-10">
       <div className="flex flex-col gap-y-8 ">
+        <section className="w-[90%] flex flex-col mx-auto">
         <section
           className="md:w-[506px] md:h-[450px] w-full h-[277px] bg-cover flex justify-between bg-center bg-no-repeat"
           style={{ backgroundImage: `url(${selectedImage})` }}
@@ -55,8 +56,8 @@ export default function ProductDetail(props) {
             {">"}
           </button>
         </section>
-
-        <section className="flex gap-x-4">
+</section>
+        <section className="flex pl-6 gap-x-4">
           {productDetails.map((product) => ( product.id !== 3) && (
             <div key={product.id}>
               <img
@@ -133,7 +134,7 @@ export default function ProductDetail(props) {
       </div>
       </div>
       <section className=" md:w-[53%] mx-auto flex flex-col gap-y-8">
-        <nav className="flex gap justify-around md:flex md:justify-center md:gap-x-10">
+        <nav className="flex gap justify-around md:flex md:justify-center mt-5 md:gap-x-10">
           <a className="text-[#737373] font-[600] underline text-[14px]" href="">
             Description
           </a>
@@ -144,23 +145,23 @@ export default function ProductDetail(props) {
             Reviews <span className="text-[#23856D]">(0)</span>
           </a>
         </nav>
-        <div className="w-[100%] hidden md:flex h-[1px] mx-auto bg-[#ECECEC]"></div>
-        <section className="md:flex md:justify-between">
-        <div className=" ">
-          <img className="md:w-[316px] md:h-[372px] md:object-cover md:object-center md:object-no-repeat" src={productDetails[2].image} alt="" />
+        <div className="w-[100%] hidden md:flex  h-[1px] mx-auto bg-[#ECECEC]"></div>
+        <section className="md:flex ">
+        <div className="w-[90%] md:w-[39%] md:flex mx-auto  md:mx-4 ">
+          <img className="md:w-[316px] rounded-[6px] md:h-[372px] md:object-cover md:object-center md:object-no-repeat" src={productDetails[2].image} alt="" />
         </div>
-        <div>
+        <div className="flex flex-col w-[100%] md:w-[50%] items-center">
         <h1 className="text-[24px] font-bold text-[#252B42]">
           {productDetails[2].title}          
         </h1>
-        <nav className="flex flex-col md:flex md:flex-col md:w-[320px] gap-y-6 text-[#737373] text-[14px] font-[400]">
+        <nav className="flex flex-col w-[85%] text-left  md:flex md:flex-col md:w-[320px] gap-y-6 text-[#737373] text-[14px] font-[400]">
           <p>{productDetails[2].description}</p>
            <p>{productDetails[2].description}</p>
             <p>{productDetails[2].description}</p>          
         </nav>
         </div>
-        <section className="md:flex md:flex-col md:gap-y-10">
-        <div className="flex flex-col gap-y-4">
+        <section className="md:flex md:flex-col md:gap-y-10 md:w-[50%] ">
+        <div className="flex flex-col gap-y-4 items-center">
           <h2 className="text-[24px] font-bold text-[#252B42]">{productDetails[2].title2}</h2>
           <ul className="flex flex-col gap-y-2">
            {productDetails[2].list1.map((item, index) => (
@@ -171,7 +172,7 @@ export default function ProductDetail(props) {
            ))}
           </ul>
           </div>
-           <div className="flex flex-col gap-y-4">
+           <div className="flex flex-col gap-y-4 items-center">
           <h2 className="text-[24px] font-bold text-[#252B42]">{productDetails[2].title3}</h2>
           <ul className="flex flex-col gap-y-2">
            {productDetails[2].list2.map((item, index) => (
