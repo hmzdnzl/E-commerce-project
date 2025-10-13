@@ -20,7 +20,7 @@ export default function HomePage() {
   }
 
   return (
-    <section>
+    <section className=" overflow-x-hidden ">
       <header >
       <div
         className={`w-full h-[716px] relative font-montserrat bg-cover bg-center items-center bg-no-repeat flex flex-col ${

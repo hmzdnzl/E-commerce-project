@@ -7,7 +7,7 @@ export default function AdvicedProduct() {
     <div className="w-full mt-40 md:mt-0 flex flex-col md:flex md:flex-row md:justify-center md:gap-x-5 ">
       <div className="md:h-[682px] md:w-[705px] mx-auto object-cover md:order-1 mt-10 md:mr-5 order-2 flex justify-center">
         <img
-          className="md:w-[700px] md:h-[775px] w-full h-auto object-cover object-bottom mt-[-90px] mx-auto"
+          className="md:w-[700px] md:h-[775px] w-[100%] h-auto object-cover object-bottom mt-[-90px]"
           src={adviced.image}
         />
       </div>

@@ -45,7 +45,7 @@ export default function FeaturedProducts() {
               <p className="text-[#737373] text-left tracking-[0.2px] leading-[20px] text-[14px] w-[90%]">
                 {product.description}
               </p>
-              <div className="flex gap-x-20 md:gap-x-10">
+              <div className="flex justify-between md:gap-x-10 flex-wrap">
                 <div className="flex gap-x-2 items-center">
                   <AlarmClock size={16} className="text-[#23A6F0]" />
                   <span className="text-[#737373] text-[12px]">

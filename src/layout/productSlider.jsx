@@ -16,8 +16,31 @@ export default function ProductSlider() {
   }
 
   return (
-    <section className="w-full pt-40 flex md:flex-row flex-col md:pb-[0] md:h-[711px] h-[1300px]  bg-[#23856D] 
-    md:px-10 md:items-end md:justify-between font-montserrat md:flex">
+    <section
+      className="w-full pt-20 flex relative flex-col h-[1230px] bg-[#23856D]  font-montserrat 
+      md:h-[710px] md:flex-row md:flex md:pb-[0] md:px-10 md:items-start md:justify-between"
+      style={{
+        width: "100%",
+        
+      }}
+    >
+      <div
+        className="w-full absolute left-0 bottom-0 z-0 h-[651px] md:h-[600px] product-slider-bg"
+        style={{
+          backgroundImage: `url(${currentProductSlide})`,
+          backgroundSize: "contain",
+          backgroundRepeat: "no-repeat",
+          backgroundPosition: "bottom",
+        }}
+      ></div>
+      <style>{`
+        @media (min-width: 768px) {
+          .product-slider-bg {
+            background-position: right bottom !important;
+            width: 85%;
+          }
+        }
+      `}</style>
       <nav className="h-full md:flex hidden items-center">
         <button
           onClick={changeProductSlide}
@@ -26,7 +49,7 @@ export default function ProductSlider() {
           <span>&lt;</span>
         </button>{" "}
       </nav>
-      <div className="md:w-[75%] w-full flex mt-20 flex-col items-end h-[600px] gap-y-11 md:flex md:flex-row md:items-start md:justify-center md:gap-x-5">
+      <div className="w-full flex mt-0 flex-col gap-y-1 md:w-[75%] md:flex md:flex-row md:items-start md:justify-center md:gap-x-5">
         <div className="md:w-[35%] w-full pt-20  md:gap-y-10 flex justify-between items-center flex-row">
           <nav className="h-full flex md:hidden items-end">
             <button
@@ -36,29 +59,29 @@ export default function ProductSlider() {
               <span>&lt;</span>
             </button>{" "}
           </nav>
-          <section className="flex flex-col gap-y-7 items-center">
-            <h1 className="text-[#FFFFFF] text-[20px] ">
+          <section className="md:flex md:flex-col md:items-start md:ml-[-50px] flex flex-col gap-y-7 items-center  ">
+            <h1 className="text-[#FFFFFF] text-[20px]">
               {currentProductSlide === productSlides[0].image
                 ? productSlides[0].title
                 : productSlides[1].title}
             </h1>
-            <h2 className="font-bold text-[#FFFFFF] text-[40px] md:text-[58px] ">
+            <h2 className="font-bold text-[#FFFFFF] text-[40px] text-center md:text-left h-[140px]   md:text-[58px] ">
               {currentProductSlide === productSlides[0].image
                 ? productSlides[0].title2
                 : productSlides[1].title2}
             </h2>
-            <p className="text-[#FFFFFF] text-[14px] w-[341px] ">
+            <p className="text-[#FFFFFF]  text-[14px] flex flex-wrap h-[100px] md:w-[350px] ">
               {currentProductSlide === productSlides[0].image
                 ? productSlides[0].description
                 : productSlides[1].description}
             </p>
-            <div className="flex gap-x-7 items-center">
+            <div className="flex flex-wrap gap-x-7 justify-center items-center">
               <span className="text-[#FFFFFF] text-[24px] font-bold ">
                 {currentProductSlide === productSlides[0].image
                   ? productSlides[0].price
                   : productSlides[1].price}
               </span>
-              <button className="bg-[#2DC071] text-[#FFFFFF] font-bold px-4 py-2 rounded">
+              <button className="bg-[#2DC071] text-[#FFFFFF] w-[181px] h-[52px] font-bold text-[14px] rounded">
                 ADD TO CART
               </button>
             </div>
@@ -72,7 +95,7 @@ export default function ProductSlider() {
             </button>{" "}
           </nav>
         </div>
-        <div className="h-full w-[145px] md:flex hidden items-end py-11">
+        <div className="md:h-[600px] w-[295px] md:flex hidden md:items-end py-11">
           <div
             className={`bg-white w-[62px] h-[10px] ${
               currentProductSlide === productSlides[1].image ? "opacity-50" : ""
@@ -83,13 +106,6 @@ export default function ProductSlider() {
               currentProductSlide === productSlides[0].image ? "opacity-50" : ""
             }`}
           ></div>
-        </div>
-        <div className="md:w-[443px] w-full md:h-[599px] h-[680px] md:object-cover">
-          <img
-            src={currentProductSlide}
-            alt="product"
-            className="w-full h-full object-cover object-top"
-          />
         </div>
       </div>
       <nav className="h-full md:flex hidden items-center">

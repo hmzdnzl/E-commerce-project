@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 export default function ProductCards() {
   const products = useSelector((state) => state.products.products);
   return (
-    <div className="font-montserrat text-center">
+    <div className="font-montserrat text-center ">
       <header>
         <p className="text-[#737373] text-[20px]">Featured Products</p>
         <h1 className="text-[#252B42] font-bold text-[24px]">

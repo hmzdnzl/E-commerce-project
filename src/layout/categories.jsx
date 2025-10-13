@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 export default function Categories() {
   const categories = useSelector((state) => state.category.categories);
   return (
-    <div className="font-montserrat flex justify-center my-10">
+    <div className="font-montserrat flex justify-center my-10 ">
       <section className="md:flex flex md:flex-row flex-col md:gap-x-4 gap-y-4">
         <div
           className="flex relative items-end w-[323px] md:w-[509px] h-[500px]"
