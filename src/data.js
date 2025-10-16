@@ -52,6 +52,22 @@ import image5 from "./assets/bestSellers/image5.jpg";
 import image6 from "./assets/bestSellers/image6.jpg";
 import image7 from "./assets/bestSellers/image7.jpg";
 import image8 from "./assets/bestSellers/image8.jpg";
+import team1 from "./assets/aboutPage/team1.jpg";
+import team2 from "./assets/aboutPage/team2.jpg";
+import team3 from "./assets/aboutPage/team3.jpg";
+import teams1 from "./assets/teamPage/teams1.jpg";
+import teams2 from "./assets/teamPage/teams2.jpg";
+import teams3 from "./assets/teamPage/teams3.jpg";
+import teams4 from "./assets/teamPage/teams4.jpg";
+import teamp1 from "./assets/teamPage/teamp1.jpg";
+import teamp2 from "./assets/teamPage/teamp2.jpg";
+import teamp3 from "./assets/teamPage/teamp3.jpg";
+import teamp4 from "./assets/teamPage/teamp4.jpg";
+import teamp5 from "./assets/teamPage/teamp5.jpg";
+import teamp6 from "./assets/teamPage/teamp6.jpg";
+import teamp7 from "./assets/teamPage/teamp7.jpg";
+import teamp8 from "./assets/teamPage/teamp8.jpg";
+import teamp9 from "./assets/teamPage/teamp9.jpg";
 
 
 
@@ -439,4 +455,27 @@ list1:["the quick fox jumps over the lazy dog",
       price2: "$6.48",
     },
   ],
-};
+  aboutPage: [
+    {id:1, number:"15K", title:"Happy Customers"},    
+    {id:2, number:"150K", title:"Monthly Visitors"},
+    {id:3, number:"15", title:"Countries Worldwide"},
+    {id:4, number:"100+", title:"Top Partners"},
+  ],
+  meetTeam: [
+    {id:1, image:team1, name:"Username", profession:"Profession"},
+    {id:2, image:team2, name:"Username", profession:"Profession"},
+    {id:3, image:team3, name:"Username", profession:"Profession"},
+  ],
+  teamPage: {
+    teamPage1: [{id:1, image:teams1, },{id:2, image:teams2, },{id:3, image:teams3, },{id:4, image:teams4, }],
+    teamPage2: [{id:1, image:teamp1, name:"Username", profession:"Profession"},
+    {id:2, image:teamp2, name:"Username", profession:"Profession"},
+    {id:3, image:teamp3, name:"Username", profession:"Profession"},
+    {id:4, image:teamp4, name:"Username", profession:"Profession"},
+    {id:5, image:teamp5, name:"Username", profession:"Profession"},
+  {id:6, image:teamp6, name:"Username", profession:"Profession"},
+  {id:7, image:teamp7, name:"Username", profession:"Profession"},
+  {id:8, image:teamp8, name:"Username", profession:"Profession"},
+  {id:9, image:teamp9, name:"Username", profession:"Profession"},
+],
+}}

@@ -12,6 +12,9 @@ import brandsReducer  from '../reducers/brandsReducer';
 import { contactReducer } from '../reducers/contactReducer';
 import ProductDetailReducer from '../reducers/productDetailReducer';
 import bestSellerReducer from '../reducers/bestSellerReducer';
+import aboutReducer from '../reducers/aboutReducer';
+import MeetOurTeamReducer from '../reducers/meetOurTeamReducer';
+import teamPageReducer from '../reducers/teamPageReducer';
 
 const rootReducer = combineReducers({
   menu: menuReducer,
@@ -26,7 +29,10 @@ const rootReducer = combineReducers({
   brands: brandsReducer,
   contact: contactReducer,
   productDetail: ProductDetailReducer,
-  bestSellers: bestSellerReducer
+  bestSellers: bestSellerReducer,
+  about: aboutReducer,
+  meetOurTeam: MeetOurTeamReducer,
+  teamPage: teamPageReducer,
 });
 
 const store = createStore(rootReducer);
