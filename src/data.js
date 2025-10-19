@@ -68,7 +68,12 @@ import teamp6 from "./assets/teamPage/teamp6.jpg";
 import teamp7 from "./assets/teamPage/teamp7.jpg";
 import teamp8 from "./assets/teamPage/teamp8.jpg";
 import teamp9 from "./assets/teamPage/teamp9.jpg";
-
+import blog1 from "./assets/blogPage/blog1.jpg";
+import blog2 from "./assets/blogPage/blog2.jpg";
+import blog3 from "./assets/blogPage/blog3.jpg";
+import blog4 from "./assets/blogPage/blog4.jpg";
+import blog5 from "./assets/blogPage/blog5.jpg";
+import blog6 from "./assets/blogPage/blog6.jpg";
 
 
 export const Data = {
@@ -478,4 +483,112 @@ list1:["the quick fox jumps over the lazy dog",
   {id:8, image:teamp8, name:"Username", profession:"Profession"},
   {id:9, image:teamp9, name:"Username", profession:"Profession"},
 ],
-}}
+},
+pricingFAQs: [
+  {id:1, title:"Work better together", description:`Met minim Mollie non desert 
+Alamo est sit cliquey dolor do met sent. 
+RELIT official consequent door ENIM RELIT 
+Mollie. Excitation venial consequent
+ sent nostrum met.`},
+  {id:2, title:`OpenType features and 
+Variable fonts`, description:`Met minim Mollie non desert 
+Alamo est sit cliquey dolor do met sent. 
+RELIT official consequent door ENIM RELIT 
+Mollie. Excitation venial consequent
+ sent nostrum met.`},
+  {id:3, title:`Start working faster today`, description:`Met minim Mollie non desert
+Alamo est sit cliquey dolor do met sent.
+RELIT official consequent door ENIM RELIT
+Mollie. Excitation venial consequent
+ sent nostrum met.`},
+ {id:4, title:`Work at the speed of thought.`, description:`Met minim Mollie non desert
+Alamo est sit cliquey dolor do met sent.
+RELIT official consequent door ENIM RELIT
+Mollie. Excitation venial consequent
+ sent nostrum met.`},
+  {id:5, title:`The Fastest way to organize`, description:`Met minim Mollie non desert
+Alamo est sit cliquey dolor do met sent.
+RELIT official consequent door ENIM RELIT
+Mollie. Excitation venial consequent
+ sent nostrum met.`},
+ {id:6, title:`The Fastest way to navigate`, description:`Met minim Mollie non desert
+Alamo est sit cliquey dolor do met sent.
+RELIT official consequent door ENIM RELIT
+Mollie. Excitation venial consequent
+ sent nostrum met.`},
+],
+blogPage:[
+  {
+      id: 1,
+      image: blog1,
+      tab1: "Google",
+      tab2: "Trending",
+      tab3: "New",
+      title: `Koudetat à la Maison #1 (L'intégrale)`,
+      description:
+        "We focus on ergonomics and meeting you where you work. It's only a keystroke away.",
+      date: "22 September 2025",
+      comments: "10 Comments",
+    },
+    {
+      id: 2,
+      image: blog2,
+      tab1: "Google",
+      tab2: "Trending",
+      tab3: "New",
+      title: `Koudetat à la Maison #1 (L'intégrale)`,
+      description:
+        "We focus on ergonomics and meeting you where you work. It's only a keystroke away.",
+      date: "22 September 2025",
+      comments: "10 Comments",
+    },
+    {
+      id: 3,
+      image: blog3,
+      tab1: "Google",
+      tab2: "Trending",
+      tab3: "New",
+      title: `Koudetat à la Maison #1 (L'intégrale)`,
+      description:
+        "We focus on ergonomics and meeting you where you work. It's only a keystroke away.",
+      date: "22 September 2025",
+      comments: "10 Comments",
+    },
+    {
+      id: 4,
+      image: blog4,
+      tab1: "Google",
+      tab2: "Trending",
+      tab3: "New",
+      title: `Koudetat à la Maison #1 (L'intégrale)`,
+      description:
+        "We focus on ergonomics and meeting you where you work. It's only a keystroke away.",
+      date: "22 September 2025",
+      comments: "10 Comments",
+    },
+    {
+      id: 5,
+      image: blog5,
+      tab1: "Google",
+      tab2: "Trending",
+      tab3: "New",
+      title: `Koudetat à la Maison #1 (L'intégrale)`,
+      description:
+        "We focus on ergonomics and meeting you where you work. It's only a keystroke away.",
+      date: "22 September 2025",
+      comments: "10 Comments",
+    },
+    {
+      id: 6,
+      image: blog6,
+      tab1: "Google",
+      tab2: "Trending",
+      tab3: "New",
+      title: `Koudetat à la Maison #1 (L'intégrale)`,
+      description:
+        "We focus on ergonomics and meeting you where you work. It's only a keystroke away.",
+      date: "22 September 2025",
+      comments: "10 Comments",
+    },
+  ]
+}

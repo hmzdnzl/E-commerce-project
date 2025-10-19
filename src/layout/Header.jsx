@@ -98,7 +98,7 @@ export default function Header() {
         Login      
         </a>
         <span className="text-[#23A6F0]">/</span>
-        <a className="text-[#23A6F0]" href="/register">Register</a>
+        <a className="text-[#23A6F0]" href="/signup">Register</a>
       </div>
       <div className="flex items-center">
         <User size={24}  className="md:hidden flex h-4 w-4 text-[#23A6F0] mr-4" />

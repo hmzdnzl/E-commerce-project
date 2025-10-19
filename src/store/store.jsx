@@ -15,6 +15,8 @@ import bestSellerReducer from '../reducers/bestSellerReducer';
 import aboutReducer from '../reducers/aboutReducer';
 import MeetOurTeamReducer from '../reducers/meetOurTeamReducer';
 import teamPageReducer from '../reducers/teamPageReducer';
+import PricingReducer from '../reducers/pricingReducer';
+import blogReducer from '../reducers/blogReducer';
 
 const rootReducer = combineReducers({
   menu: menuReducer,
@@ -33,6 +35,8 @@ const rootReducer = combineReducers({
   about: aboutReducer,
   meetOurTeam: MeetOurTeamReducer,
   teamPage: teamPageReducer,
+  pricing: PricingReducer,
+  blog: blogReducer,
 });
 
 const store = createStore(rootReducer);

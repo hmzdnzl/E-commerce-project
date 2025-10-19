@@ -5,6 +5,9 @@ import ShopPage from '../pages/ShopPage';
 import ContactPage from '../pages/ContactPage';
 import ProductDetails from '../pages/ProductDetailsPage';
 import TeamPage from '../pages/TeamPage';
+import PricingPage from '../pages/PricingPage';
+import BlogPage from '../pages/BlogPage';
+import RegisterPage from '../pages/RegisterPage';
 
 
 export default function PageContent() {
@@ -17,6 +20,9 @@ export default function PageContent() {
         <Route path="/shop" component={ShopPage} />
         <Route path="/contact" component={ContactPage} />  
         <Route path="/team" component={TeamPage} />  
+        <Route path="/prices" component={PricingPage} />
+        <Route path="/blog" component={BlogPage} />
+        <Route path="/signup" component={RegisterPage} />
       </Switch>
     </main>
   );
