@@ -1,4 +1,8 @@
-import { combineReducers, createStore } from 'redux';
+import { configureStore, combineReducers } from '@reduxjs/toolkit';
+import logger from 'redux-logger';
+import clientReducer from '../reducers/clientReducer';
+import productReducer from '../reducers/productReducer';
+import shoppingCartReducer from '../reducers/shoppingCartReducer';
 import menuReducer from '../reducers/menuReducer';
 import sliderReducer from '../reducers/sliderReducer';
 import categoryReducer from '../reducers/categoryReducer';
@@ -19,14 +23,17 @@ import PricingReducer from '../reducers/pricingReducer';
 import blogReducer from '../reducers/blogReducer';
 
 const rootReducer = combineReducers({
+  client: clientReducer,
+  product: productReducer,
+  shoppingCart: shoppingCartReducer,
   menu: menuReducer,
-  slider:sliderReducer,
+  slider: sliderReducer,
   category: categoryReducer,
   shopCategories: shopCategoriesReducer,
   advicedProduct: advicedProductReducer,
   products: productCardsReducer,
   productSlider: productSliderReducer,
-  featured:featuredReducer,
+  featured: featuredReducer,
   shopProducts: shopProductsReducer,
   brands: brandsReducer,
   contact: contactReducer,
@@ -39,5 +46,10 @@ const rootReducer = combineReducers({
   blog: blogReducer,
 });
 
-const store = createStore(rootReducer);
+const store = configureStore({
+  reducer: rootReducer,
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
+  devTools: process.env.NODE_ENV !== 'production',
+});
+
 export default store;

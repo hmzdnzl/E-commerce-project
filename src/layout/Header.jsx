@@ -10,14 +10,38 @@ import {
 import { useDispatch } from 'react-redux';
 import { toggleMenu, openMenu, closeMenu } from '../actions/action.jsx';
 import { useSelector } from 'react-redux';
+import { useState, useEffect } from "react";
 
-
-
+function logoutHandler() {
+  localStorage.setItem("isLoggedIn", "false");  
+  console.log("Logout durumu:", false);
+    window.location.reload();
+}
 export default function Header() {
+  const user = useSelector((state) => state.client.user);
+  const [userState, setUserState] = useState({});
+  const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem("isLoggedIn") === "true");
+  useEffect(() => {
+    if (isLoggedIn) {
+      const userData = localStorage.getItem("user");
+      if (userData) {
+        setUserState(JSON.parse(userData));
+      }
+    } else {
+      setUserState({});
+    }
+  }, [isLoggedIn]);
   const isOpen = useSelector((state) => state.menu.open);
   const dispatch = useDispatch();
   const toggleMenuHandler = () => {
     dispatch(toggleMenu());
+
+    useEffect(() => {
+  console.log("userState değişti:", userState);
+}, [userState]);
+
+console.log(userState, "aa");
+console.log(JSON.stringify(userState) + "aa");
   }
   return (
     <div className="w-full flex-col flex md:justify-center">
@@ -93,12 +117,14 @@ export default function Header() {
       </nav>
       <section className="flex gap-6" >
       <div className=" hidden md:flex gap-2 font-montserrat">
-        <a className="flex text-[#23A6F0] items-center gap-2" href="/login">
+        <a className={`${isLoggedIn ? "" : "hidden"} text-[#23A6F0]`} href="">{userState.name}</a>
+        <a className={` ${isLoggedIn ? "hidden" : ""} flex text-[#23A6F0] items-center gap-2`} href="/login">
         <User size={24}  className="text-[#23A6F0] h-4 w-4" />
         Login      
         </a>
         <span className="text-[#23A6F0]">/</span>
-        <a className="text-[#23A6F0]" href="/signup">Register</a>
+        <a className={` ${isLoggedIn ? "hidden" : ""} text-[#23A6F0]`} href="/signup">Register</a>
+        <button onClick={logoutHandler} className={` ${isLoggedIn ? "" : "hidden"} text-[#23A6F0]`} >Logout</button>
       </div>
       <div className="flex items-center">
         <User size={24}  className="md:hidden flex h-4 w-4 text-[#23A6F0] mr-4" />

@@ -8,6 +8,7 @@ import TeamPage from '../pages/TeamPage';
 import PricingPage from '../pages/PricingPage';
 import BlogPage from '../pages/BlogPage';
 import RegisterPage from '../pages/RegisterPage';
+import LoginPage from '../pages/LoginPage';
 
 
 export default function PageContent() {
@@ -23,6 +24,7 @@ export default function PageContent() {
         <Route path="/prices" component={PricingPage} />
         <Route path="/blog" component={BlogPage} />
         <Route path="/signup" component={RegisterPage} />
+        <Route path="/login" component={LoginPage} />
       </Switch>
     </main>
   );
