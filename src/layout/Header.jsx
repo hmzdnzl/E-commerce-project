@@ -11,26 +11,45 @@ import { useDispatch } from 'react-redux';
 import { toggleMenu, openMenu, closeMenu } from '../actions/action.jsx';
 import { useSelector } from 'react-redux';
 import { useState, useEffect } from "react";
+import Gravatar from 'react-gravatar';
+
+
 
 function logoutHandler() {
-  localStorage.setItem("isLoggedIn", "false");  
+  localStorage.setItem("isLoggedIn", "false");
+  sessionStorage.setItem("isLoggedIn", "false");
+  localStorage.removeItem("user");
+  sessionStorage.removeItem("user");
   console.log("Logout durumu:", false);
-    window.location.reload();
+  window.location.reload();
 }
 export default function Header() {
   const user = useSelector((state) => state.client.user);
   const [userState, setUserState] = useState({});
-  const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem("isLoggedIn") === "true");
+  
+  const getIsLoggedIn = () => {
+    return (
+      localStorage.getItem("isLoggedIn") === "true" ||
+      sessionStorage.getItem("isLoggedIn") === "true"
+    );
+  };
+  const getUserData = () => {
+    return (
+      JSON.parse(localStorage.getItem("user")) ||
+      JSON.parse(sessionStorage.getItem("user")) ||
+      {}
+    );
+  };
+  const [isLoggedIn, setIsLoggedIn] = useState(getIsLoggedIn());
   useEffect(() => {
-    if (isLoggedIn) {
-      const userData = localStorage.getItem("user");
-      if (userData) {
-        setUserState(JSON.parse(userData));
-      }
-    } else {
-      setUserState({});
-    }
-  }, [isLoggedIn]);
+    setIsLoggedIn(getIsLoggedIn());
+    setUserState(getUserData());
+  }, []);
+ 
+  useEffect(() => {
+    setIsLoggedIn(getIsLoggedIn());
+    setUserState(getUserData());
+  }, [user]);
   const isOpen = useSelector((state) => state.menu.open);
   const dispatch = useDispatch();
   const toggleMenuHandler = () => {
@@ -116,8 +135,9 @@ console.log(JSON.stringify(userState) + "aa");
         <a className="hover:text-[#252B42]" href="/prices">Prices</a>
       </nav>
       <section className="flex gap-6" >
-      <div className=" hidden md:flex gap-2 font-montserrat">
-        <a className={`${isLoggedIn ? "" : "hidden"} text-[#23A6F0]`} href="">{userState.name}</a>
+      <div className=" hidden md:flex items-center gap-2 font-montserrat">
+        <Gravatar email={userState.email} size={40} className={`${isLoggedIn ? "" : "hidden"} rounded-full`} />
+        <a className={`${isLoggedIn ? "" : "hidden"} text-[#23A6F0]`} href="/profile">{userState.name}</a>
         <a className={` ${isLoggedIn ? "hidden" : ""} flex text-[#23A6F0] items-center gap-2`} href="/login">
         <User size={24}  className="text-[#23A6F0] h-4 w-4" />
         Login      
@@ -127,7 +147,8 @@ console.log(JSON.stringify(userState) + "aa");
         <button onClick={logoutHandler} className={` ${isLoggedIn ? "" : "hidden"} text-[#23A6F0]`} >Logout</button>
       </div>
       <div className="flex items-center">
-        <User size={24}  className="md:hidden flex h-4 w-4 text-[#23A6F0] mr-4" />
+        <a href="/profile"> <User size={24}   className="md:hidden flex h-4 w-4 text-[#23A6F0] mr-4" /></a>
+       
         <Search size={24}  className="h-4 w-4 text-[#23A6F0]" />
         <ShoppingCart size={24}  className="h-4 w-4 text-[#23A6F0] ml-4" />
         <Heart size={24}  className="md:flex hidden h-4 w-4 text-[#23A6F0] ml-4" />
