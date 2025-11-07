@@ -1,12 +1,16 @@
-import {Data} from '../data';
 
 const initialState = {
-  shopProducts: Data.shopProducts,
-
+  shopProducts: [],
 };
+
 export const shopProductsReducer = (state = initialState, action) => {
   switch (action.type) {
-      default:
-        return state;
-    }
-    };
+    case 'SET_SHOP_PRODUCTS':
+      return {
+        ...state,
+        shopProducts: action.payload
+      };
+    default:
+      return state;
+  }
+};

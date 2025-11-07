@@ -12,9 +12,19 @@ import AboutPage from './pages/AboutPage';
 import Footer from './layout/Footer';
 import PageContent from './layout/PageContent';
 
+import { fetchCategoriesThunk } from "../src/store/thunks/fetchCategoriesThunks";
+import { fetchShopProductsThunk } from "../src/store/thunks/fetchProductsThunk";
+
 
 function App() {
   
+ const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchCategoriesThunk());
+    dispatch(fetchShopProductsThunk());
+  }, [dispatch]);
+
   return (
     <Router>
       <Header />

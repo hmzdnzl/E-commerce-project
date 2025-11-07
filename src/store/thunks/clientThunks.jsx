@@ -54,7 +54,7 @@ export function verifyUserThunk() {
       axiosInstance.defaults.headers["Authorization"] = token;
       try {
         const response = await axiosInstance.get("/verify");
-        // Eğer backend yeni token dönerse
+      
         if (response.data.token) {
           localStorage.setItem("token", response.data.token);
           axiosInstance.defaults.headers["Authorization"] = response.data.token;
@@ -65,7 +65,7 @@ export function verifyUserThunk() {
         localStorage.removeItem("token");
         delete axiosInstance.defaults.headers["Authorization"];
         console.error("Kullanıcı doğrulanamadı:", error);
-        // İsteğe bağlı: kullanıcıyı logout yap veya login ekranına yönlendir
+       
       }
     }
   };
