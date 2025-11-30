@@ -1,17 +1,27 @@
+
 import BestSeller from "../layout/bestSeller";
 import Brands from "../layout/Brands";
 import ProductDetail from "../layout/productDetail";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { useParams } from "react-router-dom";
+import { fetchProductDetailThunk } from "../store/thunks/fetchProductDetailThunk";
 
 export default function ProductDetails() {
   const [productName, setProductName] = useState("Product Name");
+  const dispatch = useDispatch();
+  const { productId } = useParams();
+
+  useEffect(() => {
+    if (productId) {
+      dispatch(fetchProductDetailThunk(productId));
+    }
+  }, [dispatch, productId]);
 
   return (
     <div>
       <div className="bg-[#FAFAFA]">
         <section className="md:flex md:mx-auto md:justify-end md:w-[70%] gap-y-10 flex flex-col">
-        
-
         <div className="items-center justify-center flex gap-x-4 mt-2 mb-10 md:flex md:justify-end">
           <a href="/" className="font-bold text-[#252B42]">
             Home
@@ -31,6 +41,5 @@ export default function ProductDetails() {
       <BestSeller />
       <Brands />
     </div>
-
   );
 }

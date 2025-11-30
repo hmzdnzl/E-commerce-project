@@ -18,7 +18,8 @@ export default function PageContent() {
       <Switch>
         <Route exact path="/" component={HomePage} />
         <Route path="/about" component={AboutPage} />
-        <Route path="/shop/detail" component={ProductDetails} />
+        <Route path="/shop/:gender/:categoryName/:categoryId/:productNameSlug/:productId" component={ProductDetails} />
+        <Route path="/shop/:gender/:categoryName/:categoryId" component={ShopPage} />
         <Route path="/shop" component={ShopPage} />
         <Route path="/contact" component={ContactPage} />
         <Route path="/team" component={TeamPage} />

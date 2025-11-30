@@ -22,7 +22,7 @@ function App() {
 
   useEffect(() => {
     dispatch(fetchCategoriesThunk());
-    dispatch(fetchShopProductsThunk());
+    // dispatch(fetchShopProductsThunk()); // Tüm ürünleri globalde çekme, ShopPage kendi ihtiyacına göre çeksin
   }, [dispatch]);
 
   return (

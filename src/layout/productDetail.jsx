@@ -1,5 +1,7 @@
-import { useSelector } from "react-redux";
+
 import { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
+import { useSelector } from "react-redux";
 import { faStar as faStarSolid } from "@fortawesome/free-solid-svg-icons";
 import { faStar as faStarRegular } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -11,30 +13,53 @@ import { ShoppingCart } from "lucide-react";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
 
 export default function ProductDetail(props) {
-  const productDetails = useSelector(
-    (state) => state.productDetail.productDetails
-  );
-  const [selectedImage, setSelectedImage] = useState(productDetails[0].image);
+  const history = useHistory();
+  const productDetails = useSelector((state) => state.productDetail.productDetails);
+  const loading = useSelector((state) => state.productDetail.loading);
   const { productName, setProductName } = props;
+  const [selectedImage, setSelectedImage] = useState(
+    productDetails.images && productDetails.images.length > 0 ? productDetails.images[0].url : ""
+  );
 
   function handleSelectImage() {
-    if (selectedImage === productDetails[0].image) {
-      setSelectedImage(productDetails[1].image);
-    } else {
-      setSelectedImage(productDetails[0].image);
+    if (productDetails.images && productDetails.images.length > 1) {
+      setSelectedImage((prev) =>
+        prev === productDetails.images[0].url
+          ? productDetails.images[1].url
+          : productDetails.images[0].url
+      );
     }
   }
 
   useEffect(() => {
-    setProductName(
-      selectedImage === productDetails[0].image
-        ? productDetails[0].title
-        : productDetails[1].title
-    );
+    setProductName(productDetails.name || "");
   }, [selectedImage, productDetails, setProductName]);
+
+  if (loading) {
+    return (
+      <div className="flex flex-col justify-center items-center min-h-[300px]">
+        <button
+          onClick={() => history.goBack()}
+          className="mb-6 px-4 py-2 bg-gray-200 rounded hover:bg-gray-300 text-gray-700 font-bold"
+        >
+          ← Back
+        </button>
+        <svg className="animate-spin h-10 w-10 text-[#23A6F0]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z"></path>
+        </svg>
+      </div>
+    );
+  }
 
   return (
     <div className="w-full mx-auto font-montserrat md:w-[100%] ">
+      <button
+        onClick={() => history.goBack()}
+        className="mb-6 px-4 py-2 bg-gray-200 rounded hover:bg-gray-300 text-gray-700 font-bold"
+      >
+        ← Back
+      </button>
       <div className="bg-[#FAFAFA]  mb-1 pb-1">
       <div className="md:flex md:justify-center md:gap-x-10">
       <div className="flex flex-col gap-y-8 ">
@@ -58,19 +83,19 @@ export default function ProductDetail(props) {
         </section>
 </section>
         <section className="flex pl-6 gap-x-4">
-          {productDetails.map((product) => ( product.id !== 3) && (
-            <div key={product.id}>
+          {productDetails.images && productDetails.images.map((img, idx) => (
+            <div key={idx}>
               <img
                 className="w-[100px] h-[75px] object-cover object-center object-no-repeat"
-                src={product.image}
-                alt={product.title}
+                src={img.url}
+                alt={productDetails.name}
               />
             </div>
           ))}
         </section>
       </div>
       <section className="flex flex-col pl-5 mt-5 gap-y-9 mb-[100px]">
-        <h1 className="text-[20px] text-[#252B42]">{productName}</h1>
+        <h1 className="text-[20px] text-[#252B42]">{productDetails.name}</h1>
         <nav className="flex items-center gap-x-2">
           <div className="flex gap-x-1 text-[#F3CD03]">
             <FontAwesomeIcon icon={faStarSolid} />
@@ -80,32 +105,24 @@ export default function ProductDetail(props) {
             <FontAwesomeIcon icon={faStarRegular} />
           </div>
           <p className="font-bold text-[14px] text-[#737373]">
-            {selectedImage === productDetails[0].image
-              ? productDetails[0].comment
-              : productDetails[1].comment}
+            {productDetails.rating ? `${productDetails.rating} / 5` : ""}
           </p>
         </nav>
         <nav>
           <p className="text-[#252B42] font-bold text-[24px]">
-            {selectedImage === productDetails[0].image
-              ? productDetails[0].price
-              : productDetails[1].price}
+            {productDetails.price ? `${productDetails.price} ₺` : ""}
           </p>
           <div className="flex items-center gap-x-2">
             <span className="font-bold text-[14px] text-[#737373]">
               Availability :
             </span>
             <p className="text-[#23A6F0] font-bold text-[14px] ">
-              {selectedImage === productDetails[0].image
-                ? productDetails[0].stockStatus
-                : productDetails[1].stockStatus}
+              {productDetails.stock > 0 ? "In Stock" : "Out of Stock"}
             </p>
           </div>
         </nav>
         <p className="text-[#858585] text-[14px] w-[271px] md:w-[464px] ">
-          {selectedImage === productDetails[0].image
-            ? productDetails[0].description
-            : productDetails[1].description}
+          {productDetails.description}
         </p>
         <div className="flex pl-3 mt-[-15px] justify-start">
           <div className="md:w-[445px] w-[283px] md:flex md:items-center flex h-[1px] bg-[#BDBDBD]"></div>
@@ -147,45 +164,47 @@ export default function ProductDetail(props) {
         </nav>
         <div className="w-[100%] hidden md:flex  h-[1px] mx-auto bg-[#ECECEC]"></div>
         <section className="md:flex ">
-        <div className="w-[90%] md:w-[39%] md:flex mx-auto  md:mx-4 ">
-          <img className="md:w-[316px] rounded-[6px] md:h-[372px] md:object-cover md:object-center md:object-no-repeat" src={productDetails[2].image} alt="" />
-        </div>
-        <div className="flex flex-col w-[100%] md:w-[50%] items-center">
-        <h1 className="text-[24px] font-bold text-[#252B42]">
-          {productDetails[2].title}          
-        </h1>
-        <nav className="flex flex-col w-[85%] text-left  md:flex md:flex-col md:w-[320px] gap-y-6 text-[#737373] text-[14px] font-[400]">
-          <p>{productDetails[2].description}</p>
-           <p>{productDetails[2].description}</p>
-            <p>{productDetails[2].description}</p>          
-        </nav>
-        </div>
-        <section className="md:flex md:flex-col md:gap-y-10 md:w-[50%] ">
-        <div className="flex flex-col gap-y-4 items-center">
-          <h2 className="text-[24px] font-bold text-[#252B42]">{productDetails[2].title2}</h2>
-          <ul className="flex flex-col gap-y-2">
-           {productDetails[2].list1.map((item, index) => (
-            <li key={index} className="flex items-center text-[#737373] text-[14px] leading-[24px] tracking-[0.2px] font-bold gap-x-2">
-              <span className="text-[#737373] font-normal mr-3">{'>'}</span>
-              {item}
-            </li>
-           ))}
-          </ul>
+          <div className="w-[90%] md:w-[39%] md:flex mx-auto  md:mx-4 ">
+            <img className="md:w-[316px] rounded-[6px] md:h-[372px] md:object-cover md:object-center md:object-no-repeat" src={productDetails.images && productDetails.images[0] ? productDetails.images[0].url : ''} alt={productDetails.name || ''} />
           </div>
-           <div className="flex flex-col gap-y-4 items-center">
-          <h2 className="text-[24px] font-bold text-[#252B42]">{productDetails[2].title3}</h2>
-          <ul className="flex flex-col gap-y-2">
-           {productDetails[2].list2.map((item, index) => (
-            <li key={index} className="flex items-center text-[#737373] text-[14px] leading-[24px] tracking-[0.2px] font-bold gap-x-2">
-              <span className="text-[#737373] font-normal mr-3">{'>'}</span>
-              {item}
-            </li>
-           ))}
-          </ul>
+          <div className="flex flex-col w-[100%] md:w-[50%] items-center">
+            <h1 className="text-[24px] font-bold text-[#252B42]">
+              {productDetails.name}
+            </h1>
+            <nav className="flex flex-col w-[85%] text-left  md:flex md:flex-col md:w-[320px] gap-y-6 text-[#737373] text-[14px] font-[400]">
+              <p>{productDetails.description}</p>
+            </nav>
           </div>
-          </section>
-</section>
-      </section>
+          <section className="md:flex md:flex-col md:gap-y-10 md:w-[50%] ">
+            <div className="flex flex-col gap-y-4 items-center">
+              {/* Example: You can add more product details here if available in productDetails */}
+              {/* <h2 className="text-[24px] font-bold text-[#252B42]">{productDetails.title2}</h2> */}
+              {/* <ul className="flex flex-col gap-y-2">
+                {Array.isArray(productDetails.list1) && productDetails.list1.map((item, index) => (
+                  <li key={index} className="flex items-center text-[#737373] text-[14px] leading-[24px] tracking-[0.2px] font-bold gap-x-2">
+                    {item}
+                  </li>
+                ))}
+              </ul> */}
+            </div>
+              </section>
+            </section>
+
+            {/* Example: If you want to show more product details, add them here. Remove below if not needed. */}
+            {/*
+            <div className="flex flex-col gap-y-4 items-center">
+      <h2 className="text-[24px] font-bold text-[#252B42]">{productDetails.title3}</h2>
+      <ul className="flex flex-col gap-y-2">
+        {Array.isArray(productDetails.list2) && productDetails.list2.map((item, index) => (
+          <li key={index} className="flex items-center text-[#737373] text-[14px] leading-[24px] tracking-[0.2px] font-bold gap-x-2">
+            <span className="text-[#737373] font-normal mr-3">{'>'}</span>
+            {item}
+          </li>
+        ))}
+      </ul>
     </div>
-  );
+    */}
+  </section>
+ </div>
+ );
 }

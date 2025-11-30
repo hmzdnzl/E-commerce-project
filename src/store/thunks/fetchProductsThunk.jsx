@@ -2,15 +2,25 @@ import  axiosInstance  from "../../api/axiosInstance";
 
 
 
-export function fetchShopProductsThunk() {
+
+export function fetchShopProductsThunk(categoryId) {
   return async function(dispatch) {
-    const response = await axiosInstance.get("/products");
-    // API'dan dönen veri { products: [...] } ise:
-    const products = response.data.products || response.data;
-    dispatch({ type: "SET_SHOP_PRODUCTS", payload: products });
+    dispatch({ type: "SET_SHOP_PRODUCTS_LOADING" });
+    const url = categoryId ? `/products?category_id=${categoryId}&limit=1000` : `/products?limit=1000`;
+    const response = await axiosInstance.get(url);
+    let filteredProducts = response.data.products;
+    if (categoryId) {
+      filteredProducts = filteredProducts.filter(p => p.category_id === Number(categoryId));
+    }
+    const filteredPayload = { ...response.data, products: filteredProducts, total: filteredProducts.length };
+    console.log(`Gerçekten category_id=${categoryId ? categoryId : 'yok'} olanlar:`, filteredPayload);
+    console.log("---------")
+    console.log(categoryId)
+    console.log("---------")
+
+    dispatch({ type: "SET_SHOP_PRODUCTS", payload: filteredPayload });
   };
 }
 
 
 
-// Eski kod kaldırıldı, sadece thunk export ediliyor.
