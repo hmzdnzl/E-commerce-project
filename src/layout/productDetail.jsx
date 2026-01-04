@@ -1,7 +1,7 @@
 
 import { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector,useDispatch } from "react-redux";
 import { faStar as faStarSolid } from "@fortawesome/free-solid-svg-icons";
 import { faStar as faStarRegular } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -12,14 +12,29 @@ import { faHeart } from "@fortawesome/free-solid-svg-icons";
 import { ShoppingCart } from "lucide-react";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
 
+import { addToCartThunk } from "../store/thunks/shoppingCartThunks";
+
 export default function ProductDetail(props) {
   const history = useHistory();
+  const dispatch = useDispatch();
   const productDetails = useSelector((state) => state.productDetail.productDetails);
   const loading = useSelector((state) => state.productDetail.loading);
   const { productName, setProductName } = props;
-  const [selectedImage, setSelectedImage] = useState(
-    productDetails.images && productDetails.images.length > 0 ? productDetails.images[0].url : ""
-  );
+
+  const [selectedImage, setSelectedImage] = useState("");
+
+  function handleAddtoCart() {
+    dispatch(addToCartThunk(productDetails));
+    
+    console.log("Ürün sepete eklendi:", productDetails.name);
+  }
+
+  
+  useEffect(() => {
+    if (productDetails.images && productDetails.images.length > 0) {
+      setSelectedImage(productDetails.images[0].url);
+    }
+  }, [productDetails.images]);
 
   function handleSelectImage() {
     if (productDetails.images && productDetails.images.length > 1) {
@@ -68,6 +83,12 @@ export default function ProductDetail(props) {
           className="md:w-[506px] md:h-[450px] w-full h-[277px] bg-cover flex justify-between bg-center bg-no-repeat"
           style={{ backgroundImage: `url(${selectedImage})` }}
         >
+         
+          {selectedImage && (
+            <div style={{ display: 'none', position: 'absolute', top: 8, right: 8, background: 'rgba(255,255,255,0.8)', padding: '2px 8px', borderRadius: 4, fontSize: 10, zIndex: 2, maxWidth: 250, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+              {selectedImage}
+            </div>
+          )}
           <button
             onClick={handleSelectImage}
             className="text-[70px] h-full text-[#FFFFFF]"
@@ -140,7 +161,7 @@ export default function ProductDetail(props) {
           <button className="w-[40px] h-[40px] rounded-full bg-[#FFFFFF] border flex items-center justify-center border-[#E8E8E8]">
             <FontAwesomeIcon icon={faHeartRegular} className="text-[#000000]" />
           </button>
-          <button className="w-[40px] h-[40px] rounded-full bg-[#FFFFFF] border flex items-center justify-center text-[#000000] border-[#E8E8E8]">
+          <button onClick={handleAddtoCart} className="w-[40px] h-[40px] rounded-full bg-[#FFFFFF] border flex items-center justify-center text-[#000000] border-[#E8E8E8]">
             <ShoppingCart />
           </button>
           <button className="w-[40px] h-[40px] rounded-full bg-[#FFFFFF] border border-[#E8E8E8] text-[#000000]">
@@ -177,7 +198,7 @@ export default function ProductDetail(props) {
           </div>
           <section className="md:flex md:flex-col md:gap-y-10 md:w-[50%] ">
             <div className="flex flex-col gap-y-4 items-center">
-              {/* Example: You can add more product details here if available in productDetails */}
+        
               {/* <h2 className="text-[24px] font-bold text-[#252B42]">{productDetails.title2}</h2> */}
               {/* <ul className="flex flex-col gap-y-2">
                 {Array.isArray(productDetails.list1) && productDetails.list1.map((item, index) => (
@@ -190,7 +211,7 @@ export default function ProductDetail(props) {
               </section>
             </section>
 
-            {/* Example: If you want to show more product details, add them here. Remove below if not needed. */}
+        
             {/*
             <div className="flex flex-col gap-y-4 items-center">
       <h2 className="text-[24px] font-bold text-[#252B42]">{productDetails.title3}</h2>

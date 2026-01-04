@@ -9,7 +9,7 @@ export default function BestSeller() {
                 <h1 className="text-[24px] font-bold text-[#252B42] text-center mt-10 mb-5">BESTSELLER PRODUCTS</h1>
             </div>
             <div className="bg-[#ECECEC] h-[1px] mx-auto w-[94%] mb-7"></div>
-            <div className="flex flex-col gap-y-14 md:flex md:flex-row md:flex-wrap gap-x-5">
+            <div className="flex flex-col gap-y-14 md:flex md:flex-row md:flex-wrap gap-x-40">
                 {bestSellers.map((product) => (
                     <div key={product.id} className="md:flex flex flex-col items-center w-full md:w-[23%]">
                         <section className="flex flex-col items-center ">

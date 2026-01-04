@@ -1,27 +1,38 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import slugify from "slugify";
 
-// Yardımcı fonksiyon: stringi slug'a çevir
-function slugify(text) {
-  return text
-    .toString()
-    .toLowerCase()
-    .replace(/\s+/g, '-')
-    .replace(/[^a-z0-9-]/g, '')
-    .replace(/-+/g, '-')
-    .replace(/^-+|-+$/g, '');
-}
+// Kategori id'den kategori adı eşlemesi
+const categoryMap = {
+  1: "tisort",
+  2: "pantolon",
+  3: "ayakkabi",
+  4: "elbise",
+  // ...diğerleri
+};
 
 export default function ProductCard({ product, categoryName, gender }) {
   if (!product) return null;
+  // Eksikse mapping ve varsayılan değer kullan
+  const mappedCategoryName = categoryName && categoryName !== '' ? categoryName : categoryMap[product.category_id] || 'unknown';
+  const mappedGender = gender && gender !== '' ? gender : 'unisex';
   const productNameSlug = slugify(product.name || "");
-  const url = `/shop/${gender}/${categoryName}/${product.category_id}/${productNameSlug}/${product.id}`;
+  const url = `/shop/${mappedGender}/${mappedCategoryName}/${product.category_id}/${productNameSlug}/${product.id}`;
 
   return (
     <Link
       to={url}
       className="block bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow duration-200 cursor-pointer group border border-gray-100 hover:border-blue-400"
       style={{ textDecoration: 'none', minWidth: 220, maxWidth: 320, margin: '0 auto' }}
+      onClick={() => {
+        console.log('Tıklanan ürün:', {
+          id: product.id,
+          name: product.name,
+          category_id: product.category_id,
+          category_name: mappedCategoryName,
+          gender: mappedGender
+        });
+      }}
     >
       <div className="relative overflow-hidden rounded-t-lg" style={{ height: 260 }}>
         <img

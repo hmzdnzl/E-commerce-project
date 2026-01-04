@@ -1,5 +1,5 @@
 const initialState = {
-  cart: [],
+  cart: JSON.parse(localStorage.getItem("cart")) || [],
   payment: {},
   address: {}
 };
