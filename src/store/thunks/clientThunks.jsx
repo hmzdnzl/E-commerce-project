@@ -21,7 +21,11 @@ export function loginUserThunk(email, password, rememberMe) {
     console.log("Thunk çalıştı:", email, password, rememberMe);
     try {
       const response = await axiosInstance.post("/login", { email, password });
-      dispatch(setUser(response.data));
+       if (response.data.token) {
+  localStorage.setItem("token", response.data.token);
+  console.log("ŞU AN Kİ TOKEN:" + localStorage.getItem("token"));
+}
+      dispatch(setUser(response.data));      
       if (rememberMe) {
         localStorage.setItem("isLoggedIn", "true");
         localStorage.setItem("user", JSON.stringify(response.data));

@@ -21,6 +21,7 @@ import MeetOurTeamReducer from '../reducers/meetOurTeamReducer';
 import teamPageReducer from '../reducers/teamPageReducer';
 import PricingReducer from '../reducers/pricingReducer';
 import blogReducer from '../reducers/blogReducer';
+import addressReducer from './thunks/addressThunk';
 
 const rootReducer = combineReducers({
   client: clientReducer,
@@ -44,6 +45,7 @@ const rootReducer = combineReducers({
   teamPage: teamPageReducer,
   pricing: PricingReducer,
   blog: blogReducer,
+  address:addressReducer
 });
 
 const store = configureStore({

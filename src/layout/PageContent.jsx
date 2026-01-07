@@ -11,6 +11,8 @@ import RegisterPage from "../pages/RegisterPage";
 import LoginPage from "../pages/LoginPage";
 import ProfilePage from "../pages/ProfilePage";
 import PrivateRoute from "./PrivateRoute";
+import ShoppingCartPage from "../pages/ShoppingCartPage";
+import OrderPage from "../pages/OrderPage";
 
 export default function PageContent() {
   return (
@@ -26,12 +28,22 @@ export default function PageContent() {
         <Route path="/prices" component={PricingPage} />
         <Route path="/blog" component={BlogPage} />
         <Route path="/signup" component={RegisterPage} />
+        <Route path="/shopping-cart" component={ShoppingCartPage} />
         <Route path="/login" component={LoginPage} />
        <Route
   path="/profile"
   render={() => (
     <PrivateRoute>
       <ProfilePage />
+      <OrderPage />
+    </PrivateRoute>
+  )}
+/>
+ <Route
+  path="/order"
+  render={() => (
+    <PrivateRoute>     
+      <OrderPage />
     </PrivateRoute>
   )}
 />

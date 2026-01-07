@@ -86,6 +86,11 @@ console.log(JSON.stringify(userState) + "aa");
   function removeItem(item) {
     dispatch(removeProductInCartThunk(item.id));
   }
+
+  function handleGoCartPage() {
+    window.location.href = "/shopping-cart";
+  }
+
   return (
     <div className="w-full flex-col flex md:justify-center">
       <section
@@ -187,8 +192,12 @@ console.log(JSON.stringify(userState) + "aa");
        
         <Search size={24}  className="h-4 w-4 text-[#23A6F0]" />
          <div className="relative group inline-block">
-  <a className="hover:text-[#252B42] flex items-center cursor-pointer" href="/shop">
-    <ShoppingCart size={24} className="h-4 w-4 text-[#23A6F0] ml-4" />
+  <a className="hover:text-[#252B42] flex items-center cursor-pointer" href="/shopping-cart">
+    <ShoppingCart onClick={handleGoCartPage} size={24} className="h-4 w-4 text-[#23A6F0] ml-4" />{cart.length > 0 && (
+      <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs w-4 h-4 flex items-center justify-center rounded-full">
+        {cart.length}
+      </span>
+    )}
     <ChevronDown className="w-4 h-4" />
   </a>
   <div className="absolute right-0 top-full w-80 bg-white shadow-lg rounded z-50 flex flex-row gap-6 p-4
@@ -202,7 +211,7 @@ console.log(JSON.stringify(userState) + "aa");
       <section>
         <div className="flex flex-col gap-5">
           {cart.map((item) => (
-            <div className="flex flex-row justify-between" key={item.id}>
+            <div className="flex flex-row justify-between gap-x-3" key={item.id}>
               <div>
                 <img
                 src={
@@ -226,26 +235,30 @@ console.log(JSON.stringify(userState) + "aa");
               <Trash size={20} color="#FF0000" />
               </button>
             </div>
-            </div>             
+            </div>       
           ))}          
            {cart.length !== 0 && (
-            <div className="gap-x-2 flex">
-           <button className="border border-black p-2 rounded-lg">Go to Cart</button>
+            
+            <div className="gap-x-2 gap-y-2 flex flex-col">
+               <div className="mt-4 font-bold text-right font-montserrat flex justify-start">
+              <p className="text-[20px] font-montserrat">Total: {cart.reduce((total, item) => +total + item.price * item.quantity, 0).toFixed(2)} ₺</p>   
+              </div>
+              <nav className="flex gap-x-2">
+           <button onClick={handleGoCartPage} className="border border-black p-2 rounded-lg">Go to Cart</button>
             <button className="border border-[#252B42] text-white bg-[#252B42] p-2 rounded-lg">Complete Purchase</button>
-            </div>
-            )}               
+            </nav>
+            </div>         
+            )}
+            
         </div>
       </section>
     </div>
   </div>
-</div>
-        
+</div>        
         <Heart size={24}  className="md:flex hidden h-4 w-4 text-[#23A6F0] ml-4" />
         <button onClick={toggleMenuHandler}>
-        <Menu size={24} className="md:hidden flex h-4 w-4 text-[#23A6F0] ml-4" />
-      
-        </button>
-         
+        <Menu size={24} className="md:hidden flex h-4 w-4 text-[#23A6F0] ml-4" />      
+        </button>         
       </div>
       </section>
       </section>

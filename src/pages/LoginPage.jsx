@@ -17,7 +17,7 @@ export default function LoginPage() {
 
   const onSubmit = async (data) => {
     dispatch(loginUserThunk(data.email, data.password, data.rememberMe));
-    // window.location.reload();
+    // window.location.reload();  
   };
 
   function handleRememberMeChange(event) {
