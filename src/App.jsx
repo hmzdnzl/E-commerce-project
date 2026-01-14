@@ -11,6 +11,7 @@ import Header from './layout/Header';
 import AboutPage from './pages/AboutPage';
 import Footer from './layout/Footer';
 import PageContent from './layout/PageContent';
+import { setAuthToken } from "./api/axiosInstance";
 
 import { fetchCategoriesThunk } from "../src/store/thunks/fetchCategoriesThunks";
 import { fetchShopProductsThunk } from "../src/store/thunks/fetchProductsThunk";
@@ -24,6 +25,13 @@ function App() {
     dispatch(fetchCategoriesThunk());
 
   }, [dispatch]);
+
+  useEffect(() => {
+  const token = localStorage.getItem("token");
+  if (token) {
+    setAuthToken("Bearer " + token);
+  }
+}, []);
 
   return (
     <Router>

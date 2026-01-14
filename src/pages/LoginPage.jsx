@@ -4,6 +4,7 @@ import { loginUserThunk } from "../store/thunks/clientThunks";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import clientReducer from "../reducers/clientReducer";
+import { setAuthToken } from "../api/axiosInstance";
 
 export default function LoginPage() {
   const user = useSelector((state) => state.client.user);
@@ -16,7 +17,13 @@ export default function LoginPage() {
   } = useForm();
 
   const onSubmit = async (data) => {
-    dispatch(loginUserThunk(data.email, data.password, data.rememberMe));
+    await dispatch(loginUserThunk(data.email, data.password, data.rememberMe));
+    const token = localStorage.getItem("token");
+    if (token) {
+      setAuthToken("Bearer " + token);
+    } else {
+      setAuthToken(null);
+    }
     // window.location.reload();  
   };
 

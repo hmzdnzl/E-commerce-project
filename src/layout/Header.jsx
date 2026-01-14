@@ -177,7 +177,9 @@ console.log(JSON.stringify(userState) + "aa");
       </nav>
       <section className="flex gap-6" >
       <div className=" hidden md:flex items-center gap-2 font-montserrat">
-        <Gravatar email={userState.email} size={40} className={`${isLoggedIn ? "" : "hidden"} rounded-full`} />
+       {isLoggedIn && userState.email && (
+  <Gravatar email={userState.email} size={40} className="rounded-full" />
+)}
         <a className={`${isLoggedIn ? "" : "hidden"} text-[#23A6F0]`} href="/profile">{userState.name}</a>
         <a className={` ${isLoggedIn ? "hidden" : ""} flex text-[#23A6F0] items-center gap-2`} href="/login">
         <User size={24}  className="text-[#23A6F0] h-4 w-4" />

@@ -16,6 +16,8 @@ import Brands from "../layout/Brands";
 
 export default function AboutPage() {
   const aboutData = useSelector((state) => state.about);
+
+
   return (
     <div className="overflow-x-hidden font-montserrat">
       <main className="flex flex-col font-montserrat items-center justify-center mt-20 md:mt-[-150px] md:gap-y-5 gap-y-14">

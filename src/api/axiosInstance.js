@@ -1,19 +1,16 @@
 import axios from "axios";
 
 const axiosInstance = axios.create({
-  baseURL: "https://workintech-fe-ecommerce.onrender.com"  
+  baseURL: "https://workintech-fe-ecommerce.onrender.com",
 });
 
 
-axiosInstance.interceptors.request.use(
-  (config) => {
-    const token = localStorage.getItem("token");
-    if (token) {
-      config.headers["Authorization"] = `Bearer ${token}`;
-    }
-    return config;
-  },
-  (error) => Promise.reject(error)
-);
+export const setAuthToken = (token) => {
+  if (token) {
+    axiosInstance.defaults.headers.common["Authorization"] = token;
+  } else {
+    delete axiosInstance.defaults.headers.common["Authorization"];
+  }
+};
 
 export default axiosInstance;

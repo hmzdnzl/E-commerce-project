@@ -5,11 +5,13 @@ import { useDispatch } from "react-redux";
 import { increaseProductInCartThunk } from "../store/thunks/increaseProductInCartThunk";
 import { decreaseProductInCartThunk } from "../store/thunks/decreaseProductInCartThunk";
 import { removeProductInCartThunk } from "../store/thunks/removeProductInCartThunk";
+import { useHistory } from "react-router-dom";
 
 export default function ShoppingCartPage() {
   const [selectedItems, setSelectedItems] = useState([]);
   const [allSelected, setAllSelected] = useState(false);
   const shippingCost = 39.99;
+  const history = useHistory();
 
   const cart = useSelector((state) => state.shoppingCart.cart);
   const dispatch = useDispatch();
@@ -51,7 +53,15 @@ export default function ShoppingCartPage() {
   console.log("Selected Items:", selectedItems);
 
   function handleCompletePurchase() {
-    window.location.href = "/order";
+    history.push({
+      pathname: "/order",
+      state: {
+        total,
+        shippingCost,
+        selectedItems,
+        cart
+      }
+    });
   }
 
   return (
@@ -77,7 +87,7 @@ export default function ShoppingCartPage() {
             </label>
           </div>
           {cart.map((item) => (
-            <div className="flex flex-row gap-x-[150px]" key={item.id}>
+            <div className="flex flex-row gap-x-[50px]" key={item.id}>
               <div className="flex items-center justify-center gap-4">
                 <input
                   type="checkbox"

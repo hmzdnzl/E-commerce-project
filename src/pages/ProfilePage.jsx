@@ -1,4 +1,11 @@
+import { useState,useEffect } from "react";
+import axios from "axios";
+import axiosInstance from "../api/axiosInstance";
+ 
+
 export default function ProfilePage() {
+    const[showSection, setShowSection] = useState("1");
+
   const userState =
     JSON.parse(localStorage.getItem("user")) ||
     JSON.parse(sessionStorage.getItem("user")) ||
@@ -14,9 +21,31 @@ function RoleShown() {
     }
 }
 
+    useEffect(() => {
+    axios.get("https://workintech-fe-ecommerce.onrender.com/user/address", {
+      headers: {
+        Authorization: axiosInstance.defaults.headers.common["Authorization"],
+      },
+    })
+    .then((response) => {
+      console.log("Adres verisi:", response.data);
+    })
+    .catch((error) => {
+      console.error("Adres verisi alınırken hata oluştu:", error);
+    });
+  }, []);
+
+function handleSectionChange(event) {
+    event.preventDefault();
+ setShowSection(event.target.value);
+}
+
+console.log("Showing section:", showSection);
+
   return (
-    <div className="">
-        <section className="flex flex-col items-center mx-auto font-montserrat gap-y-3">
+    <div className="flex flex-col font-montserrat">
+ <div className="flex flex-col px-4 gap-y-4">
+        <section className="flex flex-col items-center mx-auto font-montserrat border border-gray-400 px-8 gap-y-3">
           <h1 className="[#252B42] font-bold">User Information</h1>
           <div className="flex flex-col gap-y-2 text-gray-600 font-bold">
         <div>
@@ -30,6 +59,26 @@ function RoleShown() {
         </div>
         </div>
         </section>
+        <section className="flex flex-wrap items-center justify-center">
+            <button className="border p-2" onClick={handleSectionChange} value="1">
+               Saved Addresses
+               
+            </button>
+            <button className="border p-2" onClick={handleSectionChange} value="2">
+                Saved Payment Methods
+            </button>
+            <button className="border p-2" onClick={handleSectionChange} value="3">
+               Recent Orders
+            </button>
+            
+        </section>
     </div>
+    <section className="px-4 flex flex-col items-center justify-center">
+<div className={showSection === "1" ? "block" : "hidden"}>addresses</div>
+<div className={showSection === "2" ? "block" : "hidden"}>cards</div>
+<div className={showSection === "3" ? "block" : "hidden"}>orders</div>
+    </section>
+    </div>
+   
   );
 }

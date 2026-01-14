@@ -13,6 +13,9 @@ import ProfilePage from "../pages/ProfilePage";
 import PrivateRoute from "./PrivateRoute";
 import ShoppingCartPage from "../pages/ShoppingCartPage";
 import OrderPage from "../pages/OrderPage";
+import { setAuthToken } from "../api/axiosInstance";
+
+setAuthToken(localStorage.getItem("token"));
 
 export default function PageContent() {
   return (
@@ -34,8 +37,7 @@ export default function PageContent() {
   path="/profile"
   render={() => (
     <PrivateRoute>
-      <ProfilePage />
-      <OrderPage />
+      <ProfilePage />     
     </PrivateRoute>
   )}
 />
