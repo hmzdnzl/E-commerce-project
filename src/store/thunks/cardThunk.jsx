@@ -16,5 +16,12 @@ export const fetchCards = () => async (dispatch) => {
     dispatch(setCardFetchState("FAILED"));
     console.log(err);
   }
-};
 
+}
+
+  export const createCard = (payload) => async (dispatch) => {
+ 
+  await axiosInstance.post("/user/card", payload);
+  
+  return dispatch(fetchCards())
+};

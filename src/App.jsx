@@ -16,6 +16,8 @@ import { setAuthToken } from "./api/axiosInstance";
 import { fetchCategoriesThunk } from "../src/store/thunks/fetchCategoriesThunks";
 import { fetchShopProductsThunk } from "../src/store/thunks/fetchProductsThunk";
 
+setAuthToken(localStorage.getItem("token"));
+
 
 function App() {
   
