@@ -9,6 +9,9 @@ import { fetchCards, createCard } from "../store/thunks/cardThunk";
 import { withRouter } from "react-router-dom";
 import AddressForm from "../layout/AddressForm";
 import CreditCardForm from "../layout/CreditCardForm";
+import AddressInfos from "../layout/AddressInfos";
+import CreditCardInfos from "../layout/CreditCardInfos";
+import { CreditCard } from "lucide-react";
 
 function OrderPage(props) {
   const [responseData, setResponseData] = useState({});
@@ -26,19 +29,19 @@ function OrderPage(props) {
   const history = props.history;
   const { total, shippingCost, selectedItems, cart } = state || {};
   const [addressAndCartData, setAddressAndCartData] = useState(false);
-  const[orderSubmitRequest,setOrderSubmitRequest]=useState({
-  address_id: null,
-  order_date: new Date().toISOString(),
-  card_no: "",
-  card_name: "",
-  card_expire_month: "",
-  card_expire_year: "",
-  card_ccv: "",
-  price: 0,
-  products: []
-});
+  const [orderSubmitRequest, setOrderSubmitRequest] = useState({
+    address_id: null,
+    order_date: new Date().toISOString(),
+    card_no: "",
+    card_name: "",
+    card_expire_month: "",
+    card_expire_year: "",
+    card_ccv: "",
+    price: 0,
+    products: [],
+  });
 
-  const[deneme,setDeneme]=useState(false);
+  const [deneme, setDeneme] = useState(false);
 
   useEffect(() => {
     if (!state) {
@@ -54,9 +57,7 @@ function OrderPage(props) {
     dispatch(fetchCards());
   }, [dispatch]);
 
-
-
-/*   function handleDeneme(){
+  /*   function handleDeneme(){
     if(deneme===false){
       setDeneme(true);
     }else{
@@ -79,7 +80,7 @@ function OrderPage(props) {
 
   //console.log(deneme+" MEVCUT TOKEN: " + localStorage.getItem("token"));
 
-/*     useEffect(() => {
+  /*     useEffect(() => {
     axios.get("https://workintech-fe-ecommerce.onrender.com/user/address", {
       headers: {
         Authorization: axiosInstance.defaults.headers.common["Authorization"],
@@ -108,36 +109,34 @@ function OrderPage(props) {
   }, []); */
 
   useEffect(() => {
-    axios.get("https://workintech-fe-ecommerce.onrender.com/user/address", {
-      headers: {
-        Authorization: axiosInstance.defaults.headers.common["Authorization"],
-      },
-    })
-    .then((response) => {
-      console.log("Adres verisi:", response.data);
-    })
-    .catch((error) => {
-      console.error("Adres verisi alınırken hata oluştu:", error);
-    });
+    axios
+      .get("https://workintech-fe-ecommerce.onrender.com/user/address", {
+        headers: {
+          Authorization: axiosInstance.defaults.headers.common["Authorization"],
+        },
+      })
+      .then((response) => {
+        console.log("Adres verisi:", response.data);
+      })
+      .catch((error) => {
+        console.error("Adres verisi alınırken hata oluştu:", error);
+      });
   }, []);
 
-      useEffect(() => {
-    axios.get("https://workintech-fe-ecommerce.onrender.com/user/card", {
-      headers: {
-        Authorization: axiosInstance.defaults.headers.common["Authorization"],
-      },
-    })
-    .then((response) => {
-      console.log("Kart verisi:", response.data);
-    })
-    .catch((error) => {
-      console.error("Kart verisi alınırken hata oluştu:", error);
-    });
+  useEffect(() => {
+    axios
+      .get("https://workintech-fe-ecommerce.onrender.com/user/card", {
+        headers: {
+          Authorization: axiosInstance.defaults.headers.common["Authorization"],
+        },
+      })
+      .then((response) => {
+        console.log("Kart verisi:", response.data);
+      })
+      .catch((error) => {
+        console.error("Kart verisi alınırken hata oluştu:", error);
+      });
   }, []);
-
- 
-
-  
 
   function handleShowHideAddressForm(event) {
     event.preventDefault();
@@ -177,33 +176,34 @@ function OrderPage(props) {
 
   function handleDeneme() {
     const token = localStorage.getItem("token"); // veya başka bir yerde tutuluyorsa oradan al
- axios.post(
-    "https://workintech-fe-ecommerce.onrender.com/user/address",
-    {
-      title: "Ev",
-      name: "kisi",
-      surname: "Yılmaz",
-      phone: "5555555555",
-      city: "İstanbul",
-      district: "Kadıköy",
-      neighborhood: "Moda",
-      address: "Sokak 1, No:2"
-    },
-    {
-      headers: {
-        Authorization: token
-      }
-    }
-  )
-  .then((response) => {
-    console.log("Adres verisi:", response.data);
-  })
-  .catch((error) => {
-    console.error("Adres verisi alınırken hata oluştu:", error);
-  });
-}
+    axios
+      .post(
+        "https://workintech-fe-ecommerce.onrender.com/user/address",
+        {
+          title: "Ev",
+          name: "kisi",
+          surname: "Yılmaz",
+          phone: "5555555555",
+          city: "İstanbul",
+          district: "Kadıköy",
+          neighborhood: "Moda",
+          address: "Sokak 1, No:2",
+        },
+        {
+          headers: {
+            Authorization: token,
+          },
+        },
+      )
+      .then((response) => {
+        console.log("Adres verisi:", response.data);
+      })
+      .catch((error) => {
+        console.error("Adres verisi alınırken hata oluştu:", error);
+      });
+  }
 
-/* 
+  /* 
  const token = localStorage.getItem("token"); // veya başka bir yerde tutuluyorsa oradan al
   const addressId = 4;
  axios.delete(
@@ -222,7 +222,7 @@ function OrderPage(props) {
   });
 */
 
-/*   axios.post(
+  /*   axios.post(
     "https://workintech-fe-ecommerce.onrender.com/user/address",
     {
       title: "Ev",
@@ -254,27 +254,26 @@ function OrderPage(props) {
         title: data.title,
         phone: data.phone,
         name: data.name,
-        surname: data.surname,        
+        surname: data.surname,
         city: data.city,
         district: data.district,
         neighborhood: data.neighborhood,
         address: data.address,
       };
-        const response = await axiosInstance.post("/user/address", payload);
-        dispatch(fetchAddresses());
-        console.log(localStorage.getItem("token") + " from axiosInstance");
-        alert("Address added successfully!");
+      const response = await axiosInstance.post("/user/address", payload);
+      dispatch(fetchAddresses());
+      console.log(localStorage.getItem("token") + " from axiosInstance");
+      alert("Address added successfully!");
     } catch (error) {
       alert("Error occurred while adding address!");
       console.error("Address addition error:", error);
-       console.log(localStorage.getItem("token")+" from axiosInstance");
+      console.log(localStorage.getItem("token") + " from axiosInstance");
     }
     console.log("onSubmit fonksiyonu bitti");
   };
 
   return (
     <section className="flex justify-center font-montserrat items-center flex-col md:flex md:flex-row px-4 w-full">
-
       <div className="flex flex-col w-full md:w-[70%]">
         <section id="addressShowCardShowLinks" className="flex justify-between">
           <a
@@ -293,12 +292,14 @@ function OrderPage(props) {
           </a>
         </section>
         <section id="addressAndCardFields" className=" flex justify-between">
-          <div id="addressField"
+          <div
+            id="addressField"
             className={`border-gray-500 flex flex-col w-full ${
               addressAndCartData ? "hidden" : "border"
             }`}
           >
-            <div id="addAddressAndBackButton"
+            <div
+              id="addAddressAndBackButton"
               className="flex justify-between pr-4"
             >
               <h1 className="py-4 px-12 text-[#252B42] flex flex-col font-montserrat font-bold text-2xl">
@@ -320,57 +321,18 @@ function OrderPage(props) {
               </div>
             </div>
 
-            <section id="addressForm"
+            <section
+              id="addressForm"
               className={` flex ${addressShowHideForm ? "block" : "hidden"}`}
             >
-              <AddressForm/>
+              <AddressForm />
             </section>
-            <div id="addresssesInfos" 
-            className="border w-[40%] pl-2"> 
-              
-              {Array.isArray(addresses) && addresses.length > 0 ? (
-    addresses.map((address, idx) => (
-      <div key={idx}>
-        <div className="flex gap-2">
-          <input type="radio" name="address" value={address.id} onChange={addressIdonChange} />
-          <p>{address.title}</p>
-        </div>
-        <div className="flex gap-2">
-          <p>Phone:</p>
-          <p>{address.phone}</p>
-        </div>
-        <div className="flex gap-2">
-          <p>Name:</p>
-          <p> {address.name}</p>
-        </div>
-        <div className="flex gap-2">
-          <p>Surname:</p>
-          <p> {address.surname}</p>
-        </div>
-        <div className="flex gap-2">
-          <p>City:</p>
-          <p>{address.city}</p>
-        </div>
-        <div className="flex gap-2">
-          <p>District:</p>
-          <p>{address.district}</p>
-        </div>
-        <div className="flex gap-2">
-          <p>Neighborhood:</p>
-          <p>{address.neighborhood}</p>
-        </div>
-        <div className="flex gap-2">
-          <p>Address:</p>
-          <p>{address.address}</p>
-        </div>
-        <hr />
-      </div>
-    ))
-  ) : (
-    <p>Adres bulunamadı.</p>
-            )}</div>
+            <div id="addresssesInfos" className="border w-[40%] pl-2">
+            <AddressInfos />
+            </div>
           </div>
-          <div id="cardField"
+          <div
+            id="cardField"
             className={`w-full border border-gray-500 ${
               addressAndCartData ? "border" : "hidden"
             }`}
@@ -399,39 +361,24 @@ function OrderPage(props) {
                 </div>
               </div>
 
-              <section id="cardForm"
+              <section
+                id="cardForm"
                 className={` flex ${cardShowHideForm ? "block" : "hidden"}`}
               >
-                <CreditCardForm/>
+                <CreditCardForm />
               </section>
               <div id="cardsInfos">
-                {Array.isArray(cards) && cards.length > 0 ? (
-                  cards.map(card => (
-                    <div key={card.card_no}>
-                      <div className="flex gap-2">
-                        <p>Card Owner Name:</p>
-                        <p>{card.name_on_card}</p>
-                      </div>
-                      <div className="flex gap-2">
-                        <p>Card No:</p>
-                        <p>{card.card_no}</p>
-                      </div>
-                      <div className="flex gap-2">
-                        <p>Expiration Date:</p>
-                        <p>{card.expire_month} / {card.expire_year} </p>
-                      </div>
-                    </div>
-                  ))
-                ) : (
-                  <p>No saved cards.</p>
-                )}
+              <CreditCardInfos />
               </div>
             </div>
           </div>
         </section>
       </div>
 
-      <div id="orderSummaryField" className=" font-montserrat mt-5 flex flex-col ">
+      <div
+        id="orderSummaryField"
+        className=" font-montserrat mt-5 flex flex-col "
+      >
         <section className="border border-gray-300 gap-y-3 flex flex-col">
           <p className="p-4 ">ORDER SUMMARY</p>
           <div className="flex justify-between px-4">
@@ -465,8 +412,8 @@ function OrderPage(props) {
             {parseFloat(total) === 0
               ? "0.00"
               : parseFloat(total) > 150
-              ? (parseFloat(total) - shippingCost).toFixed(2)
-              : (parseFloat(total) + shippingCost).toFixed(2)}{" "}
+                ? (parseFloat(total) - shippingCost).toFixed(2)
+                : (parseFloat(total) + shippingCost).toFixed(2)}{" "}
             ₺
           </p>
         </div>
@@ -485,15 +432,17 @@ function OrderPage(props) {
             >
               Save & Continue
             </button>
-          
           </div>
         )}
-          {/* <button onClick={handleDeneme} className="border w-full border-[#252B42] p-2 rounded-lg bg-green-500 text-white">
+        {/* <button onClick={handleDeneme} className="border w-full border-[#252B42] p-2 rounded-lg bg-green-500 text-white">
               deneme
             </button> */}
-            <button onClick={handleDeneme}  className="border w-full border-[#252B42] p-2 rounded-lg bg-green-500 text-white">
-              deneme
-            </button>
+        <button
+          onClick={handleDeneme}
+          className="border w-full border-[#252B42] p-2 rounded-lg bg-green-500 text-white"
+        >
+          deneme
+        </button>
       </div>
       {/* <form id="addressSubmitSecond"
                 className="flex flex-col pl-2 pt-2 gap-y-1 w-full mr-2 md:mr-0 md:w-[90%]"

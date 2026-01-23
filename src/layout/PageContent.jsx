@@ -14,8 +14,11 @@ import PrivateRoute from "./PrivateRoute";
 import ShoppingCartPage from "../pages/ShoppingCartPage";
 import OrderPage from "../pages/OrderPage";
 import { setAuthToken } from "../api/axiosInstance";
+import EditAddressPage from "../pages/EditAddressPage";
+import EditCreditCardPage from "../pages/EditCreditCardPage";
 
-setAuthToken(localStorage.getItem("token"));
+const token = localStorage.getItem("token");
+setAuthToken(token ? "Bearer " + token : null);
 
 export default function PageContent() {
   return (
@@ -49,7 +52,23 @@ export default function PageContent() {
     </PrivateRoute>
   )}
 />
-      </Switch>
-    </main>
+ <Route
+  path="/edit-address"
+  render={() => (
+    <PrivateRoute>     
+      <EditAddressPage />
+    </PrivateRoute>
+  )}
+/>
+<Route
+  path="/edit-credit-card"
+  render={() => (
+    <PrivateRoute>     
+      <EditCreditCardPage />
+    </PrivateRoute>
+  )}
+/>
+  </Switch>
+</main>
   );
 }

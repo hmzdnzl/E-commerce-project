@@ -1,4 +1,5 @@
 import axiosInstance from "../../api/axiosInstance";
+import axios from "axios";
 import {
   setCardList,
   setCardFetchState
@@ -20,8 +21,25 @@ export const fetchCards = () => async (dispatch) => {
 }
 
   export const createCard = (payload) => async (dispatch) => {
- 
-  await axiosInstance.post("/user/card", payload);
+    const token = localStorage.getItem("token");
+  await axios.post("https://workintech-fe-ecommerce.onrender.com/user/card", payload, 
+        {
+      headers: {
+        Authorization: token
+      }
+    })
+  
+  return dispatch(fetchCards())
+};
+
+export const updateCard = (payload) => async (dispatch) => {
+    const token = localStorage.getItem("token");
+  await axios.put("https://workintech-fe-ecommerce.onrender.com/user/card", payload,
+        {
+      headers: {
+        Authorization: token
+      }
+    })
   
   return dispatch(fetchCards())
 };

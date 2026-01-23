@@ -1,15 +1,19 @@
-import React from "react";
-import { useForm } from "react-hook-form";
-import { useSelector, useDispatch } from "react-redux";
-import axiosInstance from "../api/axiosInstance";
 import axios from "axios";
+import { useEffect } from "react";
+import axiosInstance from "../api/axiosInstance";
+import { useForm } from "react-hook-form";
+import { useLocation } from "react-router-dom";
 
-export default function AddressForm() {
+export default function EditAddressPage() {
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
+  const location = useLocation();
+const addressId = location.state?.addressId;
+console.log("Düzenlenen adres ID'si:", addressId);
 
   const onAddressSubmit = async (data) => {
     console.log("Form submit edildi");
@@ -17,6 +21,7 @@ export default function AddressForm() {
     let payload = {};
     try {
       payload = {
+        id:addressId,
         title: data.title,
         phone: data.phone,
         name: data.name,
@@ -26,7 +31,7 @@ export default function AddressForm() {
         neighborhood: data.neighborhood,
         address: data.address,
       };
-      const response = await axios.post("https://workintech-fe-ecommerce.onrender.com/user/address", payload, 
+      const response = await axios.put("https://workintech-fe-ecommerce.onrender.com/user/address", payload, 
         {
       headers: {
         Authorization: token
@@ -34,19 +39,19 @@ export default function AddressForm() {
     });
       //dispatch(fetchAddresses());
       console.log(localStorage.getItem("token") + " from axiosInstance");
-      alert("Address added successfully!");
-      window.location.reload();
+      alert("Address updated successfully!");
+      window.location.href = "/profile";
     } catch (error) {
-      alert("Error occurred while adding address!");
-      console.error("Address addition error:", error);
+      alert("Error occurred while updating address!");
+      console.error("Address update error:", error);
       //console.log(localStorage.getItem("token") + " from axiosInstance");
       //console.log(payload);
     }
     console.log("onSubmit fonksiyonu bitti");
-  };
+  };    
 
   return (
-    <div id="addressForm" className={` flex w-[99%] md:w-[80%]`}>
+    <div className="flex flex-col items-center h-screen">
       <form
         id="addressSubmit"
         className="flex flex-col pl-2 pt-2 gap-y-3  w-[70%] mr-2 md:mr-0 md:w-[90%]"

@@ -3,37 +3,42 @@ import { useForm } from "react-hook-form";
 import { useSelector, useDispatch } from "react-redux";
 import axiosInstance from "../api/axiosInstance";
 import axios from "axios";
-import { createCard, fetchCards } from "../store/thunks/cardThunk";
+import { updateCard, fetchCards } from "../store/thunks/cardThunk";
+import { useLocation } from "react-router-dom";
 
-export default function CreditCardForm() {
-    const {
-        register,
-        handleSubmit,
-        formState: { errors },
-      } = useForm();
+export default function EditCreditCardPage() {
 
-       const dispatch = useDispatch();
+     const {
+            register,
+            handleSubmit,
+            formState: { errors },
+          } = useForm();
+    const location = useLocation();
+const cardId = location.state?.cardId;
+console.log("Düzenlenen kart ID'si:", cardId);
+           const dispatch = useDispatch();
+    
+        const onCardSubmit = async (data) => {
+        try {
+          const payload = {
+            id: cardId,
+            card_no: data.card_no,
+            expire_month: Number(data.expire_month),
+            expire_year: Number(data.expire_year),
+            name_on_card: data.name_on_card
+          };
+         await dispatch(updateCard(payload));
+          alert("Card updated successfully!");
+          dispatch(fetchCards());
+          window.location.href = "/profile";
+        } catch (error) {
+          alert("Error occurred while updating card!");
+          console.error("Card update error:", error);
+        }
+      }; 
 
-    const onCardSubmit = async (data) => {
-    try {
-      const payload = {
-        card_no: data.card_no,
-        expire_month: Number(data.expire_month),
-        expire_year: Number(data.expire_year),
-        name_on_card: data.name_on_card
-      };
-     await dispatch(createCard(payload));
-      alert("Card added successfully!");
-      dispatch(fetchCards());
-      window.location.reload();
-    } catch (error) {
-      alert("Error occurred while adding card!");
-      console.error("Card addition error:", error);
-    }
-  }; 
-
-  return <div>
-<form
+    return <div>
+        <form
                   className="flex flex-col flex-wrap pl-2 pt-2 gap-y-1 w-[90%]"
                   onSubmit={handleSubmit(onCardSubmit)}
                 >
@@ -144,5 +149,5 @@ export default function CreditCardForm() {
                     </button>
                   </div>
                 </form>
-  </div>;
+    </div>;
 }

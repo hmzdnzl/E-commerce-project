@@ -1,11 +1,15 @@
 import { useState,useEffect } from "react";
 import axios from "axios";
 import axiosInstance from "../api/axiosInstance";
+import { useDispatch } from "react-redux";
+import AddressInfos from "../layout/AddressInfos";
+import CreditCardInfos from "../layout/CreditCardInfos";
+
  
 
 export default function ProfilePage() {
     const[showSection, setShowSection] = useState("1");
-
+    const dispatch = useDispatch();
   const userState =
     JSON.parse(localStorage.getItem("user")) ||
     JSON.parse(sessionStorage.getItem("user")) ||
@@ -21,6 +25,12 @@ function RoleShown() {
     }
 }
 
+
+
+/*   useEffect(() => {
+    dispatch(fetchCards());
+  }, [dispatch]); */
+
     useEffect(() => {
     axios.get("https://workintech-fe-ecommerce.onrender.com/user/address", {
       headers: {
@@ -35,6 +45,36 @@ function RoleShown() {
     });
   }, []);
 
+  function deneme() {
+    const token = localStorage.getItem("token");
+    axios.put(
+    "https://workintech-fe-ecommerce.onrender.com/user/address",
+    { id: "4",
+      title: "Ev",
+      name: "kisi",
+      surname: "Yılmaz",
+      phone: "5555555555",
+      city: "İstanbul",
+      district: "Kadıköy",
+      neighborhood: "Moda",
+      address: "Sokak 1, No:654654654564"
+    },
+    {
+      headers: {
+        Authorization: token,
+      }
+    }
+  )
+  .then((response) => {
+    console.log("Adres verisi:", response.data);
+  })
+  .catch((error) => {
+    console.error("Adres verisi alınırken hata oluştu:", error);
+  });
+  }
+
+  
+
 function handleSectionChange(event) {
     event.preventDefault();
  setShowSection(event.target.value);
@@ -48,8 +88,9 @@ console.log("Showing section:", showSection);
         <section className="flex flex-col items-center mx-auto font-montserrat border border-gray-400 px-8 gap-y-3">
           <h1 className="[#252B42] font-bold">User Information</h1>
           <div className="flex flex-col gap-y-2 text-gray-600 font-bold">
-        <div>
-            <span>Name: </span><span>{userState.name}</span>
+            
+        <div className="flex">
+            <span>Name: </span><span>{userState.name}</span>           
         </div>
         <div>
             <span>Email: </span><span>{userState.email}</span>
@@ -61,8 +102,7 @@ console.log("Showing section:", showSection);
         </section>
         <section className="flex flex-wrap items-center justify-center">
             <button className="border p-2" onClick={handleSectionChange} value="1">
-               Saved Addresses
-               
+               Saved Addresses               
             </button>
             <button className="border p-2" onClick={handleSectionChange} value="2">
                 Saved Payment Methods
@@ -74,8 +114,12 @@ console.log("Showing section:", showSection);
         </section>
     </div>
     <section className="px-4 flex flex-col items-center justify-center">
-<div className={showSection === "1" ? "block" : "hidden"}>addresses</div>
-<div className={showSection === "2" ? "block" : "hidden"}>cards</div>
+<div className={` border ${showSection === "1" ? "flex" : "hidden"}`}>
+<AddressInfos showRadio={false} showButton={true} />
+</div>
+<div className={showSection === "2" ? "block" : "hidden"}>
+<CreditCardInfos showRadio={false} showButton={true} />
+</div>
 <div className={showSection === "3" ? "block" : "hidden"}>orders</div>
     </section>
     </div>
