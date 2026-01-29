@@ -7,6 +7,8 @@ import axios from "axios";
 export default function CreditCardInfos({
   showRadio = true,
   showButton = false,
+  selectedCardId,
+  setSelectedCardId,
 }) {
   const cards = useSelector((state) => state.card.cards);
   const dispatch = useDispatch();
@@ -54,6 +56,8 @@ export default function CreditCardInfos({
                 type="radio"
                 name="card"
                 className="mt-1 ml-1 mr-2"
+                checked={selectedCardId === card.id}
+                onChange={() => setSelectedCardId(card.id)}
                 value={card.id}
                 hidden={!showRadio}
               />

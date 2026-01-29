@@ -5,9 +5,8 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
 
-export default function AddressInfos({ showRadio = true, showButton = false }) {
+export default function AddressInfos({ showRadio = true, showButton = false, selectedAddressId, setSelectedAddressId }) {
   const addresses = useSelector((state) => state.address.addresses); 
-  const [selectedAddressId, setSelectedAddressId] = useState(null);
   const dispatch = useDispatch();
   const history = useHistory();
   useEffect(() => {
@@ -16,8 +15,8 @@ export default function AddressInfos({ showRadio = true, showButton = false }) {
 
   function editPageRoute(event) {
     const id = event.target.value;
-  setSelectedAddressId(id);
-   history.push("/edit-address", { addressId: id });   
+    setSelectedAddressId(id);
+    history.push("/edit-address", { addressId: id });   
   }
 
   function deleteAddress(event) {
@@ -39,13 +38,16 @@ export default function AddressInfos({ showRadio = true, showButton = false }) {
     console.error("Adres verisi alınırken hata oluştu:", error);
   });
   }
+   
 
-  
+
+    
+    
   return (
     <div className="flex flex-col">
       {Array.isArray(addresses) && addresses.length > 0 ? (
         addresses.map((address, idx) => (
-          <div className="flex justify-between w-[280px]">
+          <div className="flex justify-between w-[280px]" key={idx}>
           <div className="flex flex-col gap-y-1 w-full" key={idx}>
             <div className="gap-x-1 flex justify-between pt-2">
               <input
@@ -53,6 +55,8 @@ export default function AddressInfos({ showRadio = true, showButton = false }) {
                 name="address"
                 value={address.id}
                 hidden={!showRadio}
+                checked={selectedAddressId === address.id}
+                onChange={() => setSelectedAddressId(address.id)}
               />
               <p>{address.title}</p>
               <div className="flex gap-2 w-full justify-end ">

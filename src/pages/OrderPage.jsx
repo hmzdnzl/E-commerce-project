@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useEffect } from "react";
+import { use, useEffect } from "react";
 import axiosInstance from "./../api/axiosInstance";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -29,17 +29,8 @@ function OrderPage(props) {
   const history = props.history;
   const { total, shippingCost, selectedItems, cart } = state || {};
   const [addressAndCartData, setAddressAndCartData] = useState(false);
-  const [orderSubmitRequest, setOrderSubmitRequest] = useState({
-    address_id: null,
-    order_date: new Date().toISOString(),
-    card_no: "",
-    card_name: "",
-    card_expire_month: "",
-    card_expire_year: "",
-    card_ccv: "",
-    price: 0,
-    products: [],
-  });
+  const [selectedAddressId, setSelectedAddressId] = useState(null);
+  const [selectedCardId, setSelectedCardId] = useState(null);
 
   const [deneme, setDeneme] = useState(false);
 
@@ -166,28 +157,49 @@ function OrderPage(props) {
     //console.log(addressAndCartData);
   }
 
-  function addressIdonChange(event) {
-    const selectedAddressId = Number(event.target.value);
-    setOrderSubmitRequest((prevState) => ({
-      ...prevState,
-      address_id: selectedAddressId,
-    }));
-  }
+  useEffect(() => {
+    console.log("Selected address id:", selectedAddressId);
+  }, [selectedAddressId]);
+
+  useEffect(() => {
+    console.log("Selected card id:", selectedCardId);
+  }, [selectedCardId]);
+
+  useEffect(() => {
+    console.log("SEÇİLİ ÜRÜNLER:", selectedItems);
+    console.log("CART İÇERİĞİ:", cart);
+  }, [selectedItems]);
+
+
+  
+
 
   function handleDeneme() {
     const token = localStorage.getItem("token"); // veya başka bir yerde tutuluyorsa oradan al
     axios
       .post(
-        "https://workintech-fe-ecommerce.onrender.com/user/address",
+        "https://workintech-fe-ecommerce.onrender.com/order",
         {
-          title: "Ev",
-          name: "kisi",
-          surname: "Yılmaz",
-          phone: "5555555555",
-          city: "İstanbul",
-          district: "Kadıköy",
-          neighborhood: "Moda",
-          address: "Sokak 1, No:2",
+          address_id: 1,
+          order_date: "2024-01-10T14:18:30",
+          card_no: 1234123412341234,
+          card_name: "Ali Baş",
+          card_expire_month: 12,
+          card_expire_year: 2026,
+          card_ccv: 321,
+          price: 1919,
+          products: [
+            {
+              product_id: 12,
+              count: 1,
+              detail: "açık mavi - xl",
+            },
+            {
+              product_id: 13,
+              count: 2,
+              detail: "siyah - lg",
+            },
+          ],
         },
         {
           headers: {
@@ -196,12 +208,80 @@ function OrderPage(props) {
         },
       )
       .then((response) => {
-        console.log("Adres verisi:", response.data);
+        console.log("Sipariş verisi:", response.data);
       })
       .catch((error) => {
-        console.error("Adres verisi alınırken hata oluştu:", error);
+        console.error("Sipariş verisi alınırken hata oluştu:", error);
       });
   }
+
+  function handleDeneme2() {
+    const token = localStorage.getItem("token");
+    axios
+      .get("https://workintech-fe-ecommerce.onrender.com/order", {
+        headers: {
+          Authorization: token,
+        },
+      })
+      .then((response) => {
+        console.log("Sipariş verisi:", response.data);
+      })
+      .catch((error) => {
+        console.error("Sipariş verisi alınırken hata oluştu:", error);
+      });
+  }
+
+  const onOrderSubmit = async (data) => {
+    if (!selectedAddressId) {
+      alert("Lütfen bir adres seçin.");
+      return;
+    }
+    if (!selectedCardId) {
+      alert("Lütfen bir kredi kartı seçin.");
+      return;
+    }
+    if (!Array.isArray(selectedItems) || selectedItems.length === 0) {
+      alert("Lütfen en az bir ürün seçin.");
+      return;
+    }
+    const selectedCard = cards.find(card => card.id === selectedCardId);
+    if (!selectedCard) {
+      alert("Seçili kart bulunamadı.");
+      return;
+    }
+    const selectedProducts = cart.filter(item => selectedItems.includes(item.id)).map(item => ({
+      product_id: item.id,
+      count: item.quantity,
+      detail: item.selectedOptions || ""
+    }));
+    const token = localStorage.getItem("token");
+    const payload = {
+      address_id: selectedAddressId,
+      order_date: new Date().toISOString(),
+      card_no: selectedCard.card_no,
+      card_name: selectedCard.name_on_card,
+      card_expire_month: selectedCard.expire_month,
+      card_expire_year: selectedCard.expire_year,
+      card_ccv: selectedCard.ccv,
+      price: total,
+      products: selectedProducts,
+    };
+    try {
+      const response = await axios.post("https://workintech-fe-ecommerce.onrender.com/order", payload, {
+        headers: {
+          Authorization: token
+        }
+      });
+      const orderedIds = selectedItems;
+      const newCart = cart.filter(item => !orderedIds.includes(item.id));
+      dispatch({ type: "SET_CART", payload: newCart });
+      alert("Sipariş başarıyla oluşturuldu!");
+      window.location.reload();
+    } catch (error) {
+      alert("Sipariş oluşturulurken hata oluştu!");
+      console.error("Order error:", error);
+    }
+  };
 
   /* 
  const token = localStorage.getItem("token"); // veya başka bir yerde tutuluyorsa oradan al
@@ -246,31 +326,6 @@ function OrderPage(props) {
   .catch((error) => {
     console.error("Adres verisi alınırken hata oluştu:", error);
   }); */
-
-  const onAddressSubmitSecond = async (data) => {
-    console.log("Form submit edildi");
-    try {
-      const payload = {
-        title: data.title,
-        phone: data.phone,
-        name: data.name,
-        surname: data.surname,
-        city: data.city,
-        district: data.district,
-        neighborhood: data.neighborhood,
-        address: data.address,
-      };
-      const response = await axiosInstance.post("/user/address", payload);
-      dispatch(fetchAddresses());
-      console.log(localStorage.getItem("token") + " from axiosInstance");
-      alert("Address added successfully!");
-    } catch (error) {
-      alert("Error occurred while adding address!");
-      console.error("Address addition error:", error);
-      console.log(localStorage.getItem("token") + " from axiosInstance");
-    }
-    console.log("onSubmit fonksiyonu bitti");
-  };
 
   return (
     <section className="flex justify-center font-montserrat items-center flex-col md:flex md:flex-row px-4 w-full">
@@ -328,7 +383,10 @@ function OrderPage(props) {
               <AddressForm />
             </section>
             <div id="addresssesInfos" className="border w-[40%] pl-2">
-            <AddressInfos />
+              <AddressInfos
+                selectedAddressId={selectedAddressId}
+                setSelectedAddressId={setSelectedAddressId}
+              />
             </div>
           </div>
           <div
@@ -368,7 +426,7 @@ function OrderPage(props) {
                 <CreditCardForm />
               </section>
               <div id="cardsInfos">
-              <CreditCardInfos />
+                <CreditCardInfos  selectedCardId={selectedCardId} setSelectedCardId={setSelectedCardId} />
               </div>
             </div>
           </div>
@@ -419,19 +477,26 @@ function OrderPage(props) {
         </div>
         {Array.isArray(cart) && cart.length !== 0 && (
           <div className="gap-x-4 flex w-full justify-end px-2 py-4">
-            <button
+              <form
+               onSubmit={handleSubmit(onOrderSubmit)}
+              action="">
+               <button
+               type="submit"
               disabled={
                 !Array.isArray(selectedItems) || selectedItems.length === 0
               }
-              onClick={handleCompletePurchase}
+         
               className={`border w-full border-[#252B42] p-2 rounded-lg ${
                 !Array.isArray(selectedItems) || selectedItems.length === 0
                   ? "bg-gray-400 text-gray-700 cursor-not-allowed"
                   : "bg-[#252B42] text-white"
               }`}
             >
-              Save & Continue
+              Complete Purchase
             </button>
+              </form>
+          
+           
           </div>
         )}
         {/* <button onClick={handleDeneme} className="border w-full border-[#252B42] p-2 rounded-lg bg-green-500 text-white">
@@ -443,210 +508,13 @@ function OrderPage(props) {
         >
           deneme
         </button>
+        <button
+          onClick={handleDeneme2}
+          className="border w-full border-[#252B42] p-2 rounded-lg bg-green-500 text-white"
+        >
+          deneme2
+        </button>
       </div>
-      {/* <form id="addressSubmitSecond"
-                className="flex flex-col pl-2 pt-2 gap-y-1 w-full mr-2 md:mr-0 md:w-[90%]"
-                onSubmit={handleSubmit(onAddressSubmitSecond)}
-              >
-                <div className="flex gap-2 justify-between">
-                  <p>Address Title:</p>
-                  <input
-                    className="border w-[75%] pl-1 border-black"
-                    name="title"
-                    {...register("title", { required: true })}
-                    placeholder="Address Title"
-                  />
-                  {errors.title && (
-                    <span className="text-red-500">
-                      Address Title is required
-                    </span>
-                  )}
-                </div>
-                <div className="flex gap-2 justify-between">
-                  <p>Name:</p>
-                  <input
-                    className="border w-[75%] pl-1 border-black"
-                    name="name"
-                    {...register("name", { required: true })}
-                    placeholder="Name"
-                  />
-                  {errors.name && (
-                    <span className="text-red-500">Name is required</span>
-                  )}
-                </div>
-
-                <div className="flex gap-2 justify-between">
-                  <p>Surname:</p>
-                  <input
-                    className="border w-[75%] pl-1 border-black"
-                    name="surname"
-                    {...register("surname", { required: true })}
-                    placeholder="Surname"
-                  />
-                  {errors.surname && (
-                    <span className="text-red-500">Surname is required</span>
-                  )}
-                </div>
-
-                <div className="flex gap-2 justify-between">
-                  <p>Phone:</p>
-                  <input
-                    className="border w-[75%] pl-1 border-black"
-                    name="phone"
-                    {...register("phone", { required: true })}
-                    placeholder="Phone"
-                  />
-                  {errors.phone && (
-                    <span className="text-red-500">Phone is required</span>
-                  )}
-                </div>
-
-                <div className="flex gap-2 justify-between">
-                  <p>City:</p>
-                  <select
-                    className="border w-[75%] border-black"
-                    name="city"
-                    {...register("city", { required: true })}
-                    placeholder="City"
-                  >
-                    <option value="">Select a city</option>
-                    <option value="Adana">Adana</option>
-                    <option value="Adıyaman">Adıyaman</option>
-                    <option value="Afyonkarahisar">Afyonkarahisar</option>
-                    <option value="Ağrı">Ağrı</option>
-                    <option value="Aksaray">Aksaray</option>
-                    <option value="Amasya">Amasya</option>
-                    <option value="Ankara">Ankara</option>
-                    <option value="Antalya">Antalya</option>
-                    <option value="Ardahan">Ardahan</option>
-                    <option value="Artvin">Artvin</option>
-                    <option value="Aydın">Aydın</option>
-                    <option value="Balıkesir">Balıkesir</option>
-                    <option value="Bartın">Bartın</option>
-                    <option value="Batman">Batman</option>
-                    <option value="Bayburt">Bayburt</option>
-                    <option value="Bilecik">Bilecik</option>
-                    <option value="Bingöl">Bingöl</option>
-                    <option value="Bitlis">Bitlis</option>
-                    <option value="Bolu">Bolu</option>
-                    <option value="Burdur">Burdur</option>
-                    <option value="Bursa">Bursa</option>
-                    <option value="Çanakkale">Çanakkale</option>
-                    <option value="Çankırı">Çankırı</option>
-                    <option value="Çorum">Çorum</option>
-                    <option value="Denizli">Denizli</option>
-                    <option value="Diyarbakır">Diyarbakır</option>
-                    <option value="Düzce">Düzce</option>
-                    <option value="Edirne">Edirne</option>
-                    <option value="Elazığ">Elazığ</option>
-                    <option value="Erzincan">Erzincan</option>
-                    <option value="Erzurum">Erzurum</option>
-                    <option value="Eskişehir">Eskişehir</option>
-                    <option value="Gaziantep">Gaziantep</option>
-                    <option value="Giresun">Giresun</option>
-                    <option value="Gümüşhane">Gümüşhane</option>
-                    <option value="Hakkari">Hakkari</option>
-                    <option value="Hatay">Hatay</option>
-                    <option value="Iğdır">Iğdır</option>
-                    <option value="Isparta">Isparta</option>
-                    <option value="İstanbul">İstanbul</option>
-                    <option value="İzmir">İzmir</option>
-                    <option value="Kahramanmaraş">Kahramanmaraş</option>
-                    <option value="Karabük">Karabük</option>
-                    <option value="Karaman">Karaman</option>
-                    <option value="Kars">Kars</option>
-                    <option value="Kastamonu">Kastamonu</option>
-                    <option value="Kayseri">Kayseri</option>
-                    <option value="Kırıkkale">Kırıkkale</option>
-                    <option value="Kırklareli">Kırklareli</option>
-                    <option value="Kırşehir">Kırşehir</option>
-                    <option value="Kilis">Kilis</option>
-                    <option value="Kocaeli">Kocaeli</option>
-                    <option value="Konya">Konya</option>
-                    <option value="Kütahya">Kütahya</option>
-                    <option value="Malatya">Malatya</option>
-                    <option value="Manisa">Manisa</option>
-                    <option value="Mardin">Mardin</option>
-                    <option value="Mersin">Mersin</option>
-                    <option value="Muğla">Muğla</option>
-                    <option value="Muş">Muş</option>
-                    <option value="Nevşehir">Nevşehir</option>
-                    <option value="Niğde">Niğde</option>
-                    <option value="Ordu">Ordu</option>
-                    <option value="Osmaniye">Osmaniye</option>
-                    <option value="Rize">Rize</option>
-                    <option value="Sakarya">Sakarya</option>
-                    <option value="Samsun">Samsun</option>
-                    <option value="Siirt">Siirt</option>
-                    <option value="Sinop">Sinop</option>
-                    <option value="Sivas">Sivas</option>
-                    <option value="Şanlıurfa">Şanlıurfa</option>
-                    <option value="Şırnak">Şırnak</option>
-                    <option value="Tekirdağ">Tekirdağ</option>
-                    <option value="Tokat">Tokat</option>
-                    <option value="Trabzon">Trabzon</option>
-                    <option value="Tunceli">Tunceli</option>
-                    <option value="Uşak">Uşak</option>
-                    <option value="Van">Van</option>
-                    <option value="Yalova">Yalova</option>
-                    <option value="Yozgat">Yozgat</option>
-                    <option value="Zonguldak">Zonguldak</option>
-                  </select>
-                  {errors.city && (
-                    <span className="text-red-500">City is required</span>
-                  )}
-                </div>
-
-                <div className="flex gap-2 justify-between">
-                  <p>District:</p>
-                  <input
-                    className="border w-[75%] pl-1 border-black"
-                    name="district"
-                    {...register("district", { required: true })}
-                    placeholder="District"
-                  />
-                  {errors.district && (
-                    <span className="text-red-500">District is required</span>
-                  )}
-                </div>
-                <div className="flex gap-2 justify-between">
-                  <p>Neighborhood:</p>
-                  <input
-                    className="border w-[75%] pl-1 border-black"
-                    name="neighborhood"
-                    {...register("neighborhood", { required: true })}
-                    placeholder="Neighborhood"
-                  />
-                  {errors.neighborhood && (
-                    <span className="text-red-500">
-                      Neighborhood is required
-                    </span>
-                  )}
-                </div>
-                <div className="flex gap-2  justify-between">
-                  <p>Address:</p>
-                  <textarea
-                    className="border w-[75%] pl-1 h-24 border-black resize-none"
-                    name="address"
-                    rows={4}
-                    {...register("address", { required: true })}
-                    placeholder="Adres detayları (Sokak, bina, kapı no vs.)"
-                  />
-                  {errors.address && (
-                    <span className="text-red-500">
-                      Address is required
-                    </span>
-                  )}
-                </div>
-                <div className="flex mt-2 justify-end">
-                  <button
-                    className="border border-[#252B42] bg-[#252B42] w-[30%]  rounded-md h-7 text-white"
-                    type="submit"
-                  >
-                  222  Save Address 222
-                  </button>
-                </div>
-              </form> */}
     </section>
   );
 }

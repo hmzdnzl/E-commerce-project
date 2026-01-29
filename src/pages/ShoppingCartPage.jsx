@@ -184,7 +184,7 @@ export default function ShoppingCartPage() {
                     : "bg-[#252B42] text-white"
                 }`}
               >
-                Complete Purchase
+                Complete Cart
               </button>
             </div>
           )}
