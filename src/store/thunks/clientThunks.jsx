@@ -8,9 +8,7 @@ export function fetchRoles() {
     try {
       const response = await axiosInstance.get("/roles");
       dispatch(setRoles(response.data));
-      console.log("Roller alındı:", response.data);
     } catch (error) {
-      console.error("Roller alınamadı:", error);    
     }
     
   };  
@@ -18,12 +16,10 @@ export function fetchRoles() {
 
 export function loginUserThunk(email, password, rememberMe) {
   return async function(dispatch) {
-    console.log("Thunk çalıştı:", email, password, rememberMe);
     try {
       const response = await axiosInstance.post("/login", { email, password });
        if (response.data.token) {
   localStorage.setItem("token", response.data.token);
-  console.log("ŞU AN Kİ TOKEN:" + localStorage.getItem("token"));
 }
       dispatch(setUser(response.data));      
       if (rememberMe) {
@@ -39,13 +35,10 @@ export function loginUserThunk(email, password, rememberMe) {
         sessionStorage.setItem("isLoggedIn", "true");
         sessionStorage.setItem("user", JSON.stringify(response.data));
       }
-      console.log("Login durumu:", true);
       window.history.back();
     } catch (error) {
       localStorage.setItem("isLoggedIn", "false");
       sessionStorage.setItem("isLoggedIn", "false");
-      console.log("Login durumu:", false);
-      console.error("Login failed:", error);
       toast.error("Giriş başarısız! Lütfen bilgilerinizi kontrol edin.");
     }
   };
@@ -64,12 +57,9 @@ export function verifyUserThunk() {
           axiosInstance.defaults.headers["Authorization"] = response.data.token;
         }
         dispatch(setUser(response.data.user || response.data));
-        console.log("Kullanıcı doğrulandı:", response.data);
       } catch (error) {
         localStorage.removeItem("token");
-        delete axiosInstance.defaults.headers["Authorization"];
-        console.error("Kullanıcı doğrulanamadı:", error);
-       
+        delete axiosInstance.defaults.headers["Authorization"];       
       }
     }
   };

@@ -12,7 +12,6 @@ import {
 
 export default function PricingPage() {
   const pricingFAQs = useSelector((state) => state.pricing);
-  console.log(pricingFAQs);
   const priceOptions = [
     { id: 1, title: "FREE", price: 0 },
     { id: 2, title: "STANDARD", price: 9.99, annualPrice: 89.91 },
@@ -357,31 +356,38 @@ export default function PricingPage() {
         </p>
       </section>
       <section className="flex flex-col items-center justify-center text-center gap-y-10 mt-20 w-[90%] mx-auto">
-        <h1 className="text-[#252B42] text-[40px] font-bold">Start your 14 days free trial</h1>
-        <p className="text-[#737373] md:w-[30%] text-[14px]">Met minim Mollie non desert Alamo est sit cliquey dolor do met sent. RELIT official consequent.</p>
-        <button className="bg-[#23A6F0] text-white text-[14px] font-bold w-[186px] rounded-[5px] h-[52px]">Try it free now</button>
-         <nav className="flex flex-row pt-2 ">          
-                  <FontAwesomeIcon
-                    className="h-[30px] w-[30px] text-[#21A6DF] mx-3"
-                    icon={faTwitter}
-                    size="lg"
-                  />
-                  <FontAwesomeIcon
-                    className="h-[30px] w-[30px] text-[#335BF5] mx-3"
-                    icon={faFacebook}
-                    size="lg"
-                  />
-                  <FontAwesomeIcon
-                    className="h-[30px] w-[30px] text-[#E51F5A] mx-3"
-                    icon={faInstagram}
-                    size="lg"
-                  />
-                  <FontAwesomeIcon
-                    className="h-[30px] w-[30px] text-[#0A66C2]  mx-3"
-                    icon={faLinkedin}
-                    size="lg"
-                  />
-                </nav>
+        <h1 className="text-[#252B42] text-[40px] font-bold">
+          Start your 14 days free trial
+        </h1>
+        <p className="text-[#737373] md:w-[30%] text-[14px]">
+          Met minim Mollie non desert Alamo est sit cliquey dolor do met sent.
+          RELIT official consequent.
+        </p>
+        <button className="bg-[#23A6F0] text-white text-[14px] font-bold w-[186px] rounded-[5px] h-[52px]">
+          Try it free now
+        </button>
+        <nav className="flex flex-row pt-2 ">
+          <FontAwesomeIcon
+            className="h-[30px] w-[30px] text-[#21A6DF] mx-3"
+            icon={faTwitter}
+            size="lg"
+          />
+          <FontAwesomeIcon
+            className="h-[30px] w-[30px] text-[#335BF5] mx-3"
+            icon={faFacebook}
+            size="lg"
+          />
+          <FontAwesomeIcon
+            className="h-[30px] w-[30px] text-[#E51F5A] mx-3"
+            icon={faInstagram}
+            size="lg"
+          />
+          <FontAwesomeIcon
+            className="h-[30px] w-[30px] text-[#0A66C2]  mx-3"
+            icon={faLinkedin}
+            size="lg"
+          />
+        </nav>
       </section>
     </div>
   );

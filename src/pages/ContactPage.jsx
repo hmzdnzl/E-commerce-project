@@ -75,55 +75,55 @@ export default function AboutPage() {
           </h2>
         </header>
         <section className="md:flex md:flex-row md:gap-x-0 md:mt-0 flex flex-col gap-y-10 mb-20 items-center">
-        <div className=" bg-white md:w-[328px] md:h-[343px] w-[328px] h-[333px] md:pt-8 pt-10 flex flex-col gap-y-5 items-center">
-          <nav>
-            <Phone size={72} color="#23A6F0" />
-          </nav>
-          <nav className="flex flex-col items-center mt-2 gap-y-2 text-[#252B42] text-[14px] font-bold">
-            <p>{contactEmail[0].email1}</p>
-            <p>{contactEmail[0].email2}</p>
-          </nav>
-          <nav className="flex flex-col font-bold text-[16px] text-[#252B42] items-center mt-5 gap-y-5">
-            <p>Get Support</p>
-            <button className=" text-[#23A6F0] font-bold w-[161px] rounded-[5px] h-[44px] md:w-[193px] md:h-[54px] md:rounded-[37px] border border-[#23A6F0]">
-              Submit Request
-            </button>
-          </nav>
-        </div>
-        <div className="bg-[#252B42]  md:w-[328px] md:h-[403px] w-[328px] h-[393px] flex flex-col gap-y-5 justify-center items-center">
-          <nav>
-            <FontAwesomeIcon
-              icon={faLocationDot}
-              style={{ fontSize: "72px" }}
-              color="#23A6F0"
-            />
-          </nav>
-          <nav className="flex flex-col items-center mt-2 gap-y-2 text-[#FFFFFF] text-[14px] font-bold">
-            <p>{contactEmail[0].email1}</p>
-            <p>{contactEmail[0].email2}</p>
-          </nav>
-          <nav className="flex flex-col font-bold text-[16px] text-[#FFFFFF] items-center mt-5 gap-y-5">
-            <p>Get Support</p>
-            <button className=" text-[#23A6F0] font-bold w-[161px] rounded-[5px] h-[44px] md:w-[193px] md:h-[54px] md:rounded-[37px] border border-[#23A6F0]">
-              Submit Request
-            </button>
-          </nav>
-        </div>
-        <div className="bg-white w-[328px] h-[393px] md:w-[328px] md:h-[343px] flex flex-col gap-y-5 justify-center items-center">
-          <nav>
-            <Send size={72} color="#23A6F0" />
-          </nav>
-          <nav className="flex flex-col items-center mt-2 gap-y-2 text-[#252B42] text-[14px] font-bold">
-            <p>{contactEmail[0].email1}</p>
-            <p>{contactEmail[0].email2}</p>
-          </nav>
-          <nav className="flex flex-col font-bold text-[16px] text-[#252B42] items-center mt-5 gap-y-5">
-            <p>Get Support</p>
-            <button className=" text-[#23A6F0] font-bold w-[161px] rounded-[5px] h-[44px] md:w-[193px] md:h-[54px] md:rounded-[37px] border border-[#23A6F0]">
-              Submit Request
-            </button>
-          </nav>
-        </div>
+          <div className=" bg-white md:w-[328px] md:h-[343px] w-[328px] h-[333px] md:pt-8 pt-10 flex flex-col gap-y-5 items-center">
+            <nav>
+              <Phone size={72} color="#23A6F0" />
+            </nav>
+            <nav className="flex flex-col items-center mt-2 gap-y-2 text-[#252B42] text-[14px] font-bold">
+              <p>{contactEmail[0].email1}</p>
+              <p>{contactEmail[0].email2}</p>
+            </nav>
+            <nav className="flex flex-col font-bold text-[16px] text-[#252B42] items-center mt-5 gap-y-5">
+              <p>Get Support</p>
+              <button className=" text-[#23A6F0] font-bold w-[161px] rounded-[5px] h-[44px] md:w-[193px] md:h-[54px] md:rounded-[37px] border border-[#23A6F0]">
+                Submit Request
+              </button>
+            </nav>
+          </div>
+          <div className="bg-[#252B42]  md:w-[328px] md:h-[403px] w-[328px] h-[393px] flex flex-col gap-y-5 justify-center items-center">
+            <nav>
+              <FontAwesomeIcon
+                icon={faLocationDot}
+                style={{ fontSize: "72px" }}
+                color="#23A6F0"
+              />
+            </nav>
+            <nav className="flex flex-col items-center mt-2 gap-y-2 text-[#FFFFFF] text-[14px] font-bold">
+              <p>{contactEmail[0].email1}</p>
+              <p>{contactEmail[0].email2}</p>
+            </nav>
+            <nav className="flex flex-col font-bold text-[16px] text-[#FFFFFF] items-center mt-5 gap-y-5">
+              <p>Get Support</p>
+              <button className=" text-[#23A6F0] font-bold w-[161px] rounded-[5px] h-[44px] md:w-[193px] md:h-[54px] md:rounded-[37px] border border-[#23A6F0]">
+                Submit Request
+              </button>
+            </nav>
+          </div>
+          <div className="bg-white w-[328px] h-[393px] md:w-[328px] md:h-[343px] flex flex-col gap-y-5 justify-center items-center">
+            <nav>
+              <Send size={72} color="#23A6F0" />
+            </nav>
+            <nav className="flex flex-col items-center mt-2 gap-y-2 text-[#252B42] text-[14px] font-bold">
+              <p>{contactEmail[0].email1}</p>
+              <p>{contactEmail[0].email2}</p>
+            </nav>
+            <nav className="flex flex-col font-bold text-[16px] text-[#252B42] items-center mt-5 gap-y-5">
+              <p>Get Support</p>
+              <button className=" text-[#23A6F0] font-bold w-[161px] rounded-[5px] h-[44px] md:w-[193px] md:h-[54px] md:rounded-[37px] border border-[#23A6F0]">
+                Submit Request
+              </button>
+            </nav>
+          </div>
         </section>
       </section>
       <section className="flex flex-col items-center">

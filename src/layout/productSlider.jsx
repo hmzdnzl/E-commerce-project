@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 export default function ProductSlider() {
   const productSlides = useSelector((state) => state.productSlider.slides);
   const [currentProductSlide, setCurrentProductSlide] = useState(
-    productSlides[0].image
+    productSlides[0].image,
   );
 
   function changeProductSlide() {
@@ -21,7 +21,6 @@ export default function ProductSlider() {
       md:h-[710px] md:flex-row md:flex md:pb-[0] md:px-10 md:items-start md:justify-between"
       style={{
         width: "100%",
-        
       }}
     >
       <div

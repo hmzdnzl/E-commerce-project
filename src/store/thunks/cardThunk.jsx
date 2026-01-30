@@ -1,45 +1,45 @@
 import axiosInstance from "../../api/axiosInstance";
 import axios from "axios";
-import {
-  setCardList,
-  setCardFetchState
-} from "../../reducers/cardReducer";
+import { setCardList, setCardFetchState } from "../../reducers/cardReducer";
 
 export const fetchCards = () => async (dispatch) => {
   try {
     dispatch(setCardFetchState("FETCHING"));
     const res = await axiosInstance.get("/user/card");
-    console.log("Kartlar response:", res.data); // <-- Buraya ekle
     dispatch(setCardList(res.data || []));
     dispatch(setCardFetchState("FULFILLED"));
   } catch (err) {
     dispatch(setCardList([]));
     dispatch(setCardFetchState("FAILED"));
-    console.log(err);
   }
+};
 
-}
-
-  export const createCard = (payload) => async (dispatch) => {
-    const token = localStorage.getItem("token");
-  await axios.post("https://workintech-fe-ecommerce.onrender.com/user/card", payload, 
-        {
+export const createCard = (payload) => async (dispatch) => {
+  const token = localStorage.getItem("token");
+  await axios.post(
+    "https://workintech-fe-ecommerce.onrender.com/user/card",
+    payload,
+    {
       headers: {
-        Authorization: token
-      }
-    })
-  
-  return dispatch(fetchCards())
+        Authorization: token,
+      },
+    },
+  );
+
+  return dispatch(fetchCards());
 };
 
 export const updateCard = (payload) => async (dispatch) => {
-    const token = localStorage.getItem("token");
-  await axios.put("https://workintech-fe-ecommerce.onrender.com/user/card", payload,
-        {
+  const token = localStorage.getItem("token");
+  await axios.put(
+    "https://workintech-fe-ecommerce.onrender.com/user/card",
+    payload,
+    {
       headers: {
-        Authorization: token
-      }
-    })
-  
-  return dispatch(fetchCards())
+        Authorization: token,
+      },
+    },
+  );
+
+  return dispatch(fetchCards());
 };

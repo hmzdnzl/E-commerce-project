@@ -17,7 +17,6 @@ import Brands from "../layout/Brands";
 export default function AboutPage() {
   const aboutData = useSelector((state) => state.about);
 
-
   return (
     <div className="overflow-x-hidden font-montserrat">
       <main className="flex flex-col font-montserrat items-center justify-center mt-20 md:mt-[-150px] md:gap-y-5 gap-y-14">
@@ -109,19 +108,30 @@ export default function AboutPage() {
         </span>
       </section>
       <MeetOurTeam />
-      <section className="flex flex-col  bg-[#FAFAFA] items-center pt-20 mt-20" >
-        <h1 className="font-bold text-[40px] md:w-[526px] w-[277px] flex text-center mb-10">Big Companies Are Here</h1>
-        <p className="text-[#737373] text-[14px] md:w-[547px] w-[328px] mb-[-80px] text-center">Problems trying to resolve the conflict between the two major realms of Classical physics: Newtonian mechanics </p>
+      <section className="flex flex-col  bg-[#FAFAFA] items-center pt-20 mt-20">
+        <h1 className="font-bold text-[40px] md:w-[526px] w-[277px] flex text-center mb-10">
+          Big Companies Are Here
+        </h1>
+        <p className="text-[#737373] text-[14px] md:w-[547px] w-[328px] mb-[-80px] text-center">
+          Problems trying to resolve the conflict between the two major realms
+          of Classical physics: Newtonian mechanics{" "}
+        </p>
         <Brands />
       </section>
       <section className="md:flex md:flex-row md:w-[70%] mx-auto">
         <div className="bg-[#2A7CC7] w-full items-center justify-center text-center p-20 md:p-40">
           <div className="text-white md:flex md:w-[498px] md:flex-col md:items-start md:text-left flex flex-col items-center gap-y-7">
             <h1 className=" text-[16px]  font-bold">WORK WITH US</h1>
-            <h2 className=" w-[274px] md:w-[460px] font-bold text-[40px]">Now Let’s grow Yours</h2>
-            <p className="text-[14px] w-[257px] md:w-[460px]">The gradual accumulation of information about atomic and 
-small-scale behavior during the first quarter of the 20th </p>
-            <button className="border border-[#FAFAFA] w-[130px] rounded h-[52px]">Button</button>
+            <h2 className=" w-[274px] md:w-[460px] font-bold text-[40px]">
+              Now Let’s grow Yours
+            </h2>
+            <p className="text-[14px] w-[257px] md:w-[460px]">
+              The gradual accumulation of information about atomic and
+              small-scale behavior during the first quarter of the 20th{" "}
+            </p>
+            <button className="border border-[#FAFAFA] w-[130px] rounded h-[52px]">
+              Button
+            </button>
           </div>
         </div>
         <div className="hidden md:flex">

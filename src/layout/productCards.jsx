@@ -31,7 +31,9 @@ export default function ProductCards() {
                 <h5 className="text-lg font-bold">{product.name}</h5>
                 <p className="text-gray-500">{product.name2}</p>
                 <div className="flex justify-center gap-x-3 mt-4">
-                  <span className="text-xl text-[#BDBDBD] font-bold">{product.price1}</span>
+                  <span className="text-xl text-[#BDBDBD] font-bold">
+                    {product.price1}
+                  </span>
                   <span className="text-xl font-bold  text-[#23856D]">
                     {product.price2}
                   </span>

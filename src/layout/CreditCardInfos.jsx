@@ -24,7 +24,7 @@ export default function CreditCardInfos({
 
   function deleteCard(event) {
     const cardId = event.target.value;
-    const token = localStorage.getItem("token"); // veya başka bir yerde tutuluyorsa oradan al
+    const token = localStorage.getItem("token");
     axios
       .delete(
         `https://workintech-fe-ecommerce.onrender.com/user/card/${cardId}`,
@@ -35,12 +35,9 @@ export default function CreditCardInfos({
         },
       )
       .then((response) => {
-        console.log("Adres verisi:", response.data);
         window.location.reload();
       })
-      .catch((error) => {
-        console.error("Adres verisi alınırken hata oluştu:", error);
-      });
+      .catch((error) => {});
   }
 
   return (
@@ -51,7 +48,7 @@ export default function CreditCardInfos({
             key={card.card_no}
             className="gap-y-2 items-start p-2 flex justify-between"
           >
-            <div className="flex border items-start gap-y-1 w-full">
+            <div className="flex border p-2 items-start gap-y-4 w-full">
               <input
                 type="radio"
                 name="card"
@@ -61,14 +58,14 @@ export default function CreditCardInfos({
                 value={card.id}
                 hidden={!showRadio}
               />
-              <div className="gap-y-2 w-full">
+              <div className="flex flex-col gap-y-2 w-full">
                 <div className="flex gap-2 justify-between w-full">
                   <div className="">
                     {/* <p>Card Owner Name:</p> */}
                     <p>{card.name_on_card}</p>
                   </div>
 
-                  <div className="flex gap-2 w-[50%] justify-end ">
+                  <div id="buttons" className="flex gap-2 w-[50%] justify-end ">
                     <button
                       className="text-blue-900 font-bold"
                       hidden={!showButton}

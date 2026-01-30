@@ -5,23 +5,20 @@ import { useForm } from "react-hook-form";
 import { useLocation } from "react-router-dom";
 
 export default function EditAddressPage() {
-
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
   const location = useLocation();
-const addressId = location.state?.addressId;
-console.log("Düzenlenen adres ID'si:", addressId);
+  const addressId = location.state?.addressId;
 
   const onAddressSubmit = async (data) => {
-    console.log("Form submit edildi");
     const token = localStorage.getItem("token");
     let payload = {};
     try {
       payload = {
-        id:addressId,
+        id: addressId,
         title: data.title,
         phone: data.phone,
         name: data.name,
@@ -31,24 +28,21 @@ console.log("Düzenlenen adres ID'si:", addressId);
         neighborhood: data.neighborhood,
         address: data.address,
       };
-      const response = await axios.put("https://workintech-fe-ecommerce.onrender.com/user/address", payload, 
+      const response = await axios.put(
+        "https://workintech-fe-ecommerce.onrender.com/user/address",
+        payload,
         {
-      headers: {
-        Authorization: token
-      }
-    });
-      //dispatch(fetchAddresses());
-      console.log(localStorage.getItem("token") + " from axiosInstance");
+          headers: {
+            Authorization: token,
+          },
+        },
+      );
       alert("Address updated successfully!");
       window.location.href = "/profile";
     } catch (error) {
       alert("Error occurred while updating address!");
-      console.error("Address update error:", error);
-      //console.log(localStorage.getItem("token") + " from axiosInstance");
-      //console.log(payload);
     }
-    console.log("onSubmit fonksiyonu bitti");
-  };    
+  };
 
   return (
     <div className="flex flex-col items-center h-screen">

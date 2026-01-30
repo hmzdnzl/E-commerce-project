@@ -13,7 +13,6 @@ export const fetchAddresses = () => async (dispatch) => {
   } catch (err) {
     dispatch(setAddressList([]));
     dispatch(setAddressFetchState("FAILED"));
-    console.log(err);
   }
 };
 

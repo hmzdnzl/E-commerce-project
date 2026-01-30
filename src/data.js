@@ -75,7 +75,6 @@ import blog4 from "./assets/blogPage/blog4.jpg";
 import blog5 from "./assets/blogPage/blog5.jpg";
 import blog6 from "./assets/blogPage/blog6.jpg";
 
-
 export const Data = {
   sliderSection: {
     herofirst: {
@@ -357,9 +356,9 @@ export const Data = {
       id: 1,
       image: koltuk,
       title: "Floating Sofa",
-      comment:"10 Reviews",
-      price:"$1,139.33",
-      stockStatus:"In Stock",
+      comment: "10 Reviews",
+      price: "$1,139.33",
+      stockStatus: "In Stock",
       description: `Met minim Mollie non desert 
 Alamo est sit cliquey dolor do 
 met sent. RELIT official consequent 
@@ -370,31 +369,36 @@ venial consequent sent nostrum met.`,
       id: 2,
       image: sandalye,
       title: "Floating Chair",
-      comment:"11 Reviews",
-      price:"$1,139.33",
-      stockStatus:"In Stock",
+      comment: "11 Reviews",
+      price: "$1,139.33",
+      stockStatus: "In Stock",
       description: `Met minim Mollie non desert 
 Alamo est sit cliquey dolor do 
 met sent. RELIT official consequent 
 door ENIM RELIT Mollie. Excitation 
 venial consequent sent nostrum met.`,
     },
-    {    id: 3,
-    image: descriptionImage,
-    title: "the quick fox jumps over ",
-    description: `Met minim Mollie non desert Alamo est sit cliquey dolor do met sent. RELIT official consequent door ENIM RELIT Mollie. Excitation venial consequent sent nostrum met.`,
-title2: "the quick fox jumps over ",
-title3: "the quick fox jumps over ",
-list1:["the quick fox jumps over the lazy dog",
-"the quick fox jumps over the lazy dog",
-"the quick fox jumps over the lazy dog",
-"the quick fox jumps over the lazy dog"],
-  list2:["the quick fox jumps over the lazy dog",
-"the quick fox jumps over the lazy dog",
-"the quick fox jumps over the lazy dog",]
-},
-  ], 
-  bestSellers:[
+    {
+      id: 3,
+      image: descriptionImage,
+      title: "the quick fox jumps over ",
+      description: `Met minim Mollie non desert Alamo est sit cliquey dolor do met sent. RELIT official consequent door ENIM RELIT Mollie. Excitation venial consequent sent nostrum met.`,
+      title2: "the quick fox jumps over ",
+      title3: "the quick fox jumps over ",
+      list1: [
+        "the quick fox jumps over the lazy dog",
+        "the quick fox jumps over the lazy dog",
+        "the quick fox jumps over the lazy dog",
+        "the quick fox jumps over the lazy dog",
+      ],
+      list2: [
+        "the quick fox jumps over the lazy dog",
+        "the quick fox jumps over the lazy dog",
+        "the quick fox jumps over the lazy dog",
+      ],
+    },
+  ],
+  bestSellers: [
     {
       id: 1,
       image: image1,
@@ -461,64 +465,94 @@ list1:["the quick fox jumps over the lazy dog",
     },
   ],
   aboutPage: [
-    {id:1, number:"15K", title:"Happy Customers"},    
-    {id:2, number:"150K", title:"Monthly Visitors"},
-    {id:3, number:"15", title:"Countries Worldwide"},
-    {id:4, number:"100+", title:"Top Partners"},
+    { id: 1, number: "15K", title: "Happy Customers" },
+    { id: 2, number: "150K", title: "Monthly Visitors" },
+    { id: 3, number: "15", title: "Countries Worldwide" },
+    { id: 4, number: "100+", title: "Top Partners" },
   ],
   meetTeam: [
-    {id:1, image:team1, name:"Username", profession:"Profession"},
-    {id:2, image:team2, name:"Username", profession:"Profession"},
-    {id:3, image:team3, name:"Username", profession:"Profession"},
+    { id: 1, image: team1, name: "Username", profession: "Profession" },
+    { id: 2, image: team2, name: "Username", profession: "Profession" },
+    { id: 3, image: team3, name: "Username", profession: "Profession" },
   ],
   teamPage: {
-    teamPage1: [{id:1, image:teams1, },{id:2, image:teams2, },{id:3, image:teams3, },{id:4, image:teams4, }],
-    teamPage2: [{id:1, image:teamp1, name:"Username", profession:"Profession"},
-    {id:2, image:teamp2, name:"Username", profession:"Profession"},
-    {id:3, image:teamp3, name:"Username", profession:"Profession"},
-    {id:4, image:teamp4, name:"Username", profession:"Profession"},
-    {id:5, image:teamp5, name:"Username", profession:"Profession"},
-  {id:6, image:teamp6, name:"Username", profession:"Profession"},
-  {id:7, image:teamp7, name:"Username", profession:"Profession"},
-  {id:8, image:teamp8, name:"Username", profession:"Profession"},
-  {id:9, image:teamp9, name:"Username", profession:"Profession"},
-],
-},
-pricingFAQs: [
-  {id:1, title:"Work better together", description:`Met minim Mollie non desert 
+    teamPage1: [
+      { id: 1, image: teams1 },
+      { id: 2, image: teams2 },
+      { id: 3, image: teams3 },
+      { id: 4, image: teams4 },
+    ],
+    teamPage2: [
+      { id: 1, image: teamp1, name: "Username", profession: "Profession" },
+      { id: 2, image: teamp2, name: "Username", profession: "Profession" },
+      { id: 3, image: teamp3, name: "Username", profession: "Profession" },
+      { id: 4, image: teamp4, name: "Username", profession: "Profession" },
+      { id: 5, image: teamp5, name: "Username", profession: "Profession" },
+      { id: 6, image: teamp6, name: "Username", profession: "Profession" },
+      { id: 7, image: teamp7, name: "Username", profession: "Profession" },
+      { id: 8, image: teamp8, name: "Username", profession: "Profession" },
+      { id: 9, image: teamp9, name: "Username", profession: "Profession" },
+    ],
+  },
+  pricingFAQs: [
+    {
+      id: 1,
+      title: "Work better together",
+      description: `Met minim Mollie non desert 
 Alamo est sit cliquey dolor do met sent. 
 RELIT official consequent door ENIM RELIT 
 Mollie. Excitation venial consequent
- sent nostrum met.`},
-  {id:2, title:`OpenType features and 
-Variable fonts`, description:`Met minim Mollie non desert 
+ sent nostrum met.`,
+    },
+    {
+      id: 2,
+      title: `OpenType features and 
+Variable fonts`,
+      description: `Met minim Mollie non desert 
 Alamo est sit cliquey dolor do met sent. 
 RELIT official consequent door ENIM RELIT 
 Mollie. Excitation venial consequent
- sent nostrum met.`},
-  {id:3, title:`Start working faster today`, description:`Met minim Mollie non desert
+ sent nostrum met.`,
+    },
+    {
+      id: 3,
+      title: `Start working faster today`,
+      description: `Met minim Mollie non desert
 Alamo est sit cliquey dolor do met sent.
 RELIT official consequent door ENIM RELIT
 Mollie. Excitation venial consequent
- sent nostrum met.`},
- {id:4, title:`Work at the speed of thought.`, description:`Met minim Mollie non desert
+ sent nostrum met.`,
+    },
+    {
+      id: 4,
+      title: `Work at the speed of thought.`,
+      description: `Met minim Mollie non desert
 Alamo est sit cliquey dolor do met sent.
 RELIT official consequent door ENIM RELIT
 Mollie. Excitation venial consequent
- sent nostrum met.`},
-  {id:5, title:`The Fastest way to organize`, description:`Met minim Mollie non desert
+ sent nostrum met.`,
+    },
+    {
+      id: 5,
+      title: `The Fastest way to organize`,
+      description: `Met minim Mollie non desert
 Alamo est sit cliquey dolor do met sent.
 RELIT official consequent door ENIM RELIT
 Mollie. Excitation venial consequent
- sent nostrum met.`},
- {id:6, title:`The Fastest way to navigate`, description:`Met minim Mollie non desert
+ sent nostrum met.`,
+    },
+    {
+      id: 6,
+      title: `The Fastest way to navigate`,
+      description: `Met minim Mollie non desert
 Alamo est sit cliquey dolor do met sent.
 RELIT official consequent door ENIM RELIT
 Mollie. Excitation venial consequent
- sent nostrum met.`},
-],
-blogPage:[
-  {
+ sent nostrum met.`,
+    },
+  ],
+  blogPage: [
+    {
       id: 1,
       image: blog1,
       tab1: "Google",
@@ -590,5 +624,5 @@ blogPage:[
       date: "22 September 2025",
       comments: "10 Comments",
     },
-  ]
-}
+  ],
+};

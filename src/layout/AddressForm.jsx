@@ -12,7 +12,6 @@ export default function AddressForm() {
   } = useForm();
 
   const onAddressSubmit = async (data) => {
-    console.log("Form submit edildi");
     const token = localStorage.getItem("token");
     let payload = {};
     try {
@@ -26,23 +25,20 @@ export default function AddressForm() {
         neighborhood: data.neighborhood,
         address: data.address,
       };
-      const response = await axios.post("https://workintech-fe-ecommerce.onrender.com/user/address", payload, 
+      const response = await axios.post(
+        "https://workintech-fe-ecommerce.onrender.com/user/address",
+        payload,
         {
-      headers: {
-        Authorization: token
-      }
-    });
-      //dispatch(fetchAddresses());
-      console.log(localStorage.getItem("token") + " from axiosInstance");
+          headers: {
+            Authorization: token,
+          },
+        },
+      );
       alert("Address added successfully!");
       window.location.reload();
     } catch (error) {
       alert("Error occurred while adding address!");
-      console.error("Address addition error:", error);
-      //console.log(localStorage.getItem("token") + " from axiosInstance");
-      //console.log(payload);
     }
-    console.log("onSubmit fonksiyonu bitti");
   };
 
   return (

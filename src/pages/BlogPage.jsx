@@ -1,4 +1,4 @@
-import { useSelector } from 'react-redux';
+import { useSelector } from "react-redux";
 import { AlarmClock } from "lucide-react";
 import { LineChart } from "lucide-react";
 
@@ -9,7 +9,10 @@ export default function BlogPage() {
     <div>
       <div className="md:flex md:flex-row md:flex-wrap md:w-[50%] md:mx-auto w-[90%] md:-[348px] flex flex-col md:justify-center md:gap-x-5 items-center gap-y-5">
         {blogPosts.map((product) => (
-          <div key={product.id} className="my-5 w-[80%] border md:w-[348px] md:flex md:flex-col md:items-center flex flex-col gap-y-5">
+          <div
+            key={product.id}
+            className="my-5 w-[80%] border md:w-[348px] md:flex md:flex-col md:items-center flex flex-col gap-y-5"
+          >
             <img
               src={product.image}
               alt={product.title}
@@ -45,7 +48,10 @@ export default function BlogPage() {
                 </div>
                 <div className="flex gap-x-2">
                   {" "}
-                  <LineChart size={16} className="text-[#23856D]" /> <span className="text-[#737373] text-[12px]">{product.comments}</span>
+                  <LineChart size={16} className="text-[#23856D]" />{" "}
+                  <span className="text-[#737373] text-[12px]">
+                    {product.comments}
+                  </span>
                 </div>
               </div>
               <a href="/" className="text-[#737373] text-left font-bold">

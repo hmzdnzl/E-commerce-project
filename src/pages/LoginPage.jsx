@@ -8,7 +8,6 @@ import { setAuthToken } from "../api/axiosInstance";
 
 export default function LoginPage() {
   const user = useSelector((state) => state.client.user);
-  console.log(user);
   const dispatch = useDispatch();
   const {
     register,
@@ -24,7 +23,6 @@ export default function LoginPage() {
     } else {
       setAuthToken(null);
     }
-    // window.location.reload();  
   };
 
   function handleRememberMeChange(event) {
@@ -34,10 +32,7 @@ export default function LoginPage() {
 
   return (
     <div className="flex flex-col items-center justify-center font-montserrat ">
-      <form
-        className="flex flex-col gap-y-3"
-        onSubmit={handleSubmit(onSubmit)}
-      >
+      <form className="flex flex-col gap-y-3" onSubmit={handleSubmit(onSubmit)}>
         <label className="flex justify-between" htmlFor="">
           Email:
           <input
@@ -78,7 +73,10 @@ export default function LoginPage() {
               id="rememberMe"
               {...register("rememberMe")}
             />
-            <label htmlFor="rememberMe" className="ml-2"> Remember Me</label>
+            <label htmlFor="rememberMe" className="ml-2">
+              {" "}
+              Remember Me
+            </label>
           </div>
         </div>
       </form>

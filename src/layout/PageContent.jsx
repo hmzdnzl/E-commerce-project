@@ -26,8 +26,14 @@ export default function PageContent() {
       <Switch>
         <Route exact path="/" component={HomePage} />
         <Route path="/about" component={AboutPage} />
-        <Route path="/shop/:gender/:categoryName/:categoryId/:productNameSlug/:productId" component={ProductDetails} />
-        <Route path="/shop/:gender/:categoryName/:categoryId" component={ShopPage} />
+        <Route
+          path="/shop/:gender/:categoryName/:categoryId/:productNameSlug/:productId"
+          component={ProductDetails}
+        />
+        <Route
+          path="/shop/:gender/:categoryName/:categoryId"
+          component={ShopPage}
+        />
         <Route path="/shop" component={ShopPage} />
         <Route path="/contact" component={ContactPage} />
         <Route path="/team" component={TeamPage} />
@@ -36,39 +42,39 @@ export default function PageContent() {
         <Route path="/signup" component={RegisterPage} />
         <Route path="/shopping-cart" component={ShoppingCartPage} />
         <Route path="/login" component={LoginPage} />
-       <Route
-  path="/profile"
-  render={() => (
-    <PrivateRoute>
-      <ProfilePage />     
-    </PrivateRoute>
-  )}
-/>
- <Route
-  path="/order"
-  render={() => (
-    <PrivateRoute>     
-      <OrderPage />
-    </PrivateRoute>
-  )}
-/>
- <Route
-  path="/edit-address"
-  render={() => (
-    <PrivateRoute>     
-      <EditAddressPage />
-    </PrivateRoute>
-  )}
-/>
-<Route
-  path="/edit-credit-card"
-  render={() => (
-    <PrivateRoute>     
-      <EditCreditCardPage />
-    </PrivateRoute>
-  )}
-/>
-  </Switch>
-</main>
+        <Route
+          path="/profile"
+          render={() => (
+            <PrivateRoute>
+              <ProfilePage />
+            </PrivateRoute>
+          )}
+        />
+        <Route
+          path="/order"
+          render={() => (
+            <PrivateRoute>
+              <OrderPage />
+            </PrivateRoute>
+          )}
+        />
+        <Route
+          path="/edit-address"
+          render={() => (
+            <PrivateRoute>
+              <EditAddressPage />
+            </PrivateRoute>
+          )}
+        />
+        <Route
+          path="/edit-credit-card"
+          render={() => (
+            <PrivateRoute>
+              <EditCreditCardPage />
+            </PrivateRoute>
+          )}
+        />
+      </Switch>
+    </main>
   );
 }

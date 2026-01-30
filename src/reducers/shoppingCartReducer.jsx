@@ -1,7 +1,7 @@
 const initialState = {
   cart: JSON.parse(localStorage.getItem("cart")) || [],
   payment: {},
-  address: {}
+  address: {},
 };
 
 export const SET_CART = "SET_CART";
@@ -21,7 +21,7 @@ export function setAddress(address) {
 export default function shoppingCartReducer(state = initialState, action) {
   switch (action.type) {
     case SET_CART:
-       localStorage.setItem("cart", JSON.stringify(action.payload));
+      localStorage.setItem("cart", JSON.stringify(action.payload));
       return { ...state, cart: action.payload };
     case SET_PAYMENT:
       return { ...state, payment: action.payload };

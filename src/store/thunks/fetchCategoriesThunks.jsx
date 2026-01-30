@@ -1,14 +1,11 @@
-import  axiosInstance  from "../../api/axiosInstance";
-
+import axiosInstance from "../../api/axiosInstance";
 
 export function fetchCategoriesThunk() {
-  return async function(dispatch) {
+  return async function (dispatch) {
     const response = await axiosInstance.get("/categories");
-    console.log("Kategoriler:", response.data);
     dispatch(setCategories(response.data));
   };
 }
-
 
 const initialState = { categories: [] };
 export function setCategories(categories) {

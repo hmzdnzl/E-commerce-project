@@ -92,11 +92,18 @@ export default function TeamPage() {
           ))}
         </div>
       </section>
-      <section className="flex flex-col justify-center items-center gap-y-7 mt-20" >
-        <h1 className="font-bold text-[40px] text-center text-[#252B42] md:w-auto w-[322px] mx-auto ">Start your 14 days free trial</h1>
-        <p className="text-[14px] text-[#737373] text-center md:w-[400px] w-[85%] mx-auto">Met minim Mollie non desert Alamo est sit cliquey dolor do met sent. RELIT official consequent.</p>
-        <button className="bg-[#23A6F0] text-[14px] rounded w-[186px] h-[52px]  text-white ">Try it free now</button>
-        <nav className="flex flex-row pt-2 ">          
+      <section className="flex flex-col justify-center items-center gap-y-7 mt-20">
+        <h1 className="font-bold text-[40px] text-center text-[#252B42] md:w-auto w-[322px] mx-auto ">
+          Start your 14 days free trial
+        </h1>
+        <p className="text-[14px] text-[#737373] text-center md:w-[400px] w-[85%] mx-auto">
+          Met minim Mollie non desert Alamo est sit cliquey dolor do met sent.
+          RELIT official consequent.
+        </p>
+        <button className="bg-[#23A6F0] text-[14px] rounded w-[186px] h-[52px]  text-white ">
+          Try it free now
+        </button>
+        <nav className="flex flex-row pt-2 ">
           <FontAwesomeIcon
             className="h-[24px] w-[24px] text-[#21A6DF] mx-2"
             icon={faTwitter}

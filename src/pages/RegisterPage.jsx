@@ -1,4 +1,4 @@
-import { useState,useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import axiosInstance from "../api/axiosInstance.js";
 
@@ -14,60 +14,52 @@ export default function RegisterPage() {
     formState: { errors },
   } = useForm();
 
-
   useEffect(() => {
-    axiosInstance.get('/roles')
-      .then(response => {
+    axiosInstance
+      .get("/roles")
+      .then((response) => {
         setRole(response.data);
         setSelectedRole(response.data[2].id);
       })
-      .catch(error => {
-        console.error(error);
-      });
+      .catch((error) => {});
   }, []);
 
-const onSubmit = async (data) => {
-  setLoading(true);
-  delete data.passwordConfirm;
-  data.role_id = Number(selectedRole);
-  if (selectedRole === 2) {
-    data.store = {
-      name: data.storeName,
-      phone: data.phone,
-      tax_no: data.taxId,
-      bank_account: data.bankAccount
-    };
-    delete data.storeName;
-    delete data.phone;
-    delete data.taxId;
-    delete data.bankAccount;
-  } else {    
-    delete data.storeName;
-    delete data.phone;
-    delete data.taxId;
-    delete data.bankAccount;
-  }
+  const onSubmit = async (data) => {
+    setLoading(true);
+    delete data.passwordConfirm;
+    data.role_id = Number(selectedRole);
+    if (selectedRole === 2) {
+      data.store = {
+        name: data.storeName,
+        phone: data.phone,
+        tax_no: data.taxId,
+        bank_account: data.bankAccount,
+      };
+      delete data.storeName;
+      delete data.phone;
+      delete data.taxId;
+      delete data.bankAccount;
+    } else {
+      delete data.storeName;
+      delete data.phone;
+      delete data.taxId;
+      delete data.bankAccount;
+    }
 
-  try {
-    const response = await axiosInstance.post("/signup", data);
-    alert("You need to click link in email to activate your account!");
-    window.history.back();
-  } catch (err) {
-    setApiError(err?.response?.data || err.message);
-    console.error(err);
-  } finally {
-    setLoading(false);
-  }
-  console.log("Gönderilen veri:", data);
-};
-
+    try {
+      const response = await axiosInstance.post("/signup", data);
+      alert("You need to click link in email to activate your account!");
+      window.history.back();
+    } catch (err) {
+      setApiError(err?.response?.data || err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   function roleChoice(event) {
     setSelectedRole(Number(event.target.value));
   }
- console.log(selectedRole);
- 
-
 
   return (
     <section className="font-montserrat">
@@ -87,9 +79,11 @@ const onSubmit = async (data) => {
               name=""
               id=""
             >
-              {role.map(role => (
-    <option key={role.id} value={role.id}>{role.name}</option>
-  ))}
+              {role.map((role) => (
+                <option key={role.id} value={role.id}>
+                  {role.name}
+                </option>
+              ))}
             </select>
           </label>
           <label className="flex justify-between">
@@ -124,7 +118,12 @@ const onSubmit = async (data) => {
               className="bg-blue-100"
             />
           </label>
-          {errors.password && <span>Şifre en az 8 karakter, sayı, büyük/küçük harf ve özel karakter içermeli</span>}
+          {errors.password && (
+            <span>
+              Şifre en az 8 karakter, sayı, büyük/küçük harf ve özel karakter
+              içermeli
+            </span>
+          )}
           <label className="flex justify-between">
             Password Confirmation:
             <input
@@ -170,9 +169,7 @@ const onSubmit = async (data) => {
               name="phone"
               className="bg-blue-100 ml-2"
             />
-            {errors.phone && (
-              <span>Geçerli bir telefon numarası girin</span>
-            )}
+            {errors.phone && <span>Geçerli bir telefon numarası girin</span>}
           </label>
           <label
             className={`flex justify-between ${
@@ -184,7 +181,8 @@ const onSubmit = async (data) => {
               type="text"
               {...register("taxId", {
                 required: selectedRole === 2,
-                minLength: 10, pattern:/T\d{4}V\d{6}/
+                minLength: 10,
+                pattern: /T\d{4}V\d{6}/,
               })}
               name="taxId"
               className="bg-blue-100 ml-2"
@@ -201,7 +199,8 @@ const onSubmit = async (data) => {
               type="text"
               {...register("bankAccount", {
                 required: selectedRole === 2,
-                minLength: 26, pattern:/^TR\\d{2}\\d{5}\\d{16}$/
+                minLength: 26,
+                pattern: /^TR\\d{2}\\d{5}\\d{16}$/,
               })}
               name="bankAccount"
               className="bg-blue-100 ml-2"
@@ -215,7 +214,7 @@ const onSubmit = async (data) => {
             className="w-[150px] h-[50px] bg-blue-400 text-white rounded-[10px]"
             disabled={loading}
           >
-           Register
+            Register
           </button>
         </form>
         {apiError && (

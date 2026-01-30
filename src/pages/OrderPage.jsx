@@ -14,7 +14,6 @@ import CreditCardInfos from "../layout/CreditCardInfos";
 import { CreditCard } from "lucide-react";
 
 function OrderPage(props) {
-  const [responseData, setResponseData] = useState({});
   const dispatch = useDispatch();
   const addresses = useSelector((state) => state.address.addresses);
   const cards = useSelector((state) => state.card.cards);
@@ -32,228 +31,57 @@ function OrderPage(props) {
   const [selectedAddressId, setSelectedAddressId] = useState(null);
   const [selectedCardId, setSelectedCardId] = useState(null);
 
-  const [deneme, setDeneme] = useState(false);
-
   useEffect(() => {
     if (!state) {
       history.push("/shopping-cart");
     }
   }, [state, history]);
 
-  useEffect(() => {
-    dispatch(fetchAddresses());
-  }, [dispatch]);
-
-  useEffect(() => {
-    dispatch(fetchCards());
-  }, [dispatch]);
-
-  /*   function handleDeneme(){
-    if(deneme===false){
-      setDeneme(true);
-    }else{
-      setDeneme(false);
-    }
-  }
-    useEffect(() => {
-    axios.get("https://workintech-fe-ecommerce.onrender.com/user/address", {
-      headers: {
-        Authorization: axiosInstance.defaults.headers.common["Authorization"],
-      },
-    })
-    .then((response) => {
-      console.log("Adres verisi:", response.data);
-    })
-    .catch((error) => {
-      console.error("Adres verisi alınırken hata oluştu:", error);
-    });
-  }, [deneme]); */
-
-  //console.log(deneme+" MEVCUT TOKEN: " + localStorage.getItem("token"));
-
-  /*     useEffect(() => {
-    axios.get("https://workintech-fe-ecommerce.onrender.com/user/address", {
-      headers: {
-        Authorization: axiosInstance.defaults.headers.common["Authorization"],
-      },
-    })
-    .then((response) => {
-      console.log("Adres verisi:", response.data);
-    })
-    .catch((error) => {
-      console.error("Adres verisi alınırken hata oluştu:", error);
-    });
-  }, []);
-
-      useEffect(() => {
-    axios.get("https://workintech-fe-ecommerce.onrender.com/user/card", {
-      headers: {
-        Authorization: axiosInstance.defaults.headers.common["Authorization"],
-      },
-    })
-    .then((response) => {
-      console.log("Kart verisi:", response.data);
-    })
-    .catch((error) => {
-      console.error("Kart verisi alınırken hata oluştu:", error);
-    });
-  }, []); */
-
-  useEffect(() => {
-    axios
-      .get("https://workintech-fe-ecommerce.onrender.com/user/address", {
-        headers: {
-          Authorization: axiosInstance.defaults.headers.common["Authorization"],
-        },
-      })
-      .then((response) => {
-        console.log("Adres verisi:", response.data);
-      })
-      .catch((error) => {
-        console.error("Adres verisi alınırken hata oluştu:", error);
-      });
-  }, []);
-
-  useEffect(() => {
-    axios
-      .get("https://workintech-fe-ecommerce.onrender.com/user/card", {
-        headers: {
-          Authorization: axiosInstance.defaults.headers.common["Authorization"],
-        },
-      })
-      .then((response) => {
-        console.log("Kart verisi:", response.data);
-      })
-      .catch((error) => {
-        console.error("Kart verisi alınırken hata oluştu:", error);
-      });
-  }, []);
-
   function handleShowHideAddressForm(event) {
     event.preventDefault();
     setAddressShowHideForm((prev) => !prev);
-    //console.log(addressShowHideForm);
   }
 
   function handleShowHideCardForm(event) {
     event.preventDefault();
     setCardShowHideForm((prev) => !prev);
-    //console.log(cardShowHideForm);
-  }
-
-  function handleCompletePurchase() {
-    alert("Satın alma işlemi tamamlandı!");
   }
 
   function handleAddress(event) {
     event.preventDefault();
     setAddressAndCartData(false);
-    //console.log(addressAndCartData);
   }
 
   function handlePaymentDetail(event) {
     event.preventDefault();
     setAddressAndCartData(true);
-    //console.log(addressAndCartData);
-  }
-
-  useEffect(() => {
-    console.log("Selected address id:", selectedAddressId);
-  }, [selectedAddressId]);
-
-  useEffect(() => {
-    console.log("Selected card id:", selectedCardId);
-  }, [selectedCardId]);
-
-  useEffect(() => {
-    console.log("SEÇİLİ ÜRÜNLER:", selectedItems);
-    console.log("CART İÇERİĞİ:", cart);
-  }, [selectedItems]);
-
-
-  
-
-
-  function handleDeneme() {
-    const token = localStorage.getItem("token"); // veya başka bir yerde tutuluyorsa oradan al
-    axios
-      .post(
-        "https://workintech-fe-ecommerce.onrender.com/order",
-        {
-          address_id: 1,
-          order_date: "2024-01-10T14:18:30",
-          card_no: 1234123412341234,
-          card_name: "Ali Baş",
-          card_expire_month: 12,
-          card_expire_year: 2026,
-          card_ccv: 321,
-          price: 1919,
-          products: [
-            {
-              product_id: 12,
-              count: 1,
-              detail: "açık mavi - xl",
-            },
-            {
-              product_id: 13,
-              count: 2,
-              detail: "siyah - lg",
-            },
-          ],
-        },
-        {
-          headers: {
-            Authorization: token,
-          },
-        },
-      )
-      .then((response) => {
-        console.log("Sipariş verisi:", response.data);
-      })
-      .catch((error) => {
-        console.error("Sipariş verisi alınırken hata oluştu:", error);
-      });
-  }
-
-  function handleDeneme2() {
-    const token = localStorage.getItem("token");
-    axios
-      .get("https://workintech-fe-ecommerce.onrender.com/order", {
-        headers: {
-          Authorization: token,
-        },
-      })
-      .then((response) => {
-        console.log("Sipariş verisi:", response.data);
-      })
-      .catch((error) => {
-        console.error("Sipariş verisi alınırken hata oluştu:", error);
-      });
   }
 
   const onOrderSubmit = async (data) => {
     if (!selectedAddressId) {
-      alert("Lütfen bir adres seçin.");
+      alert("Please select an address.");
       return;
     }
     if (!selectedCardId) {
-      alert("Lütfen bir kredi kartı seçin.");
+      alert("Please select a credit card.");
       return;
     }
     if (!Array.isArray(selectedItems) || selectedItems.length === 0) {
-      alert("Lütfen en az bir ürün seçin.");
+      alert("Please select at least one product.");
       return;
     }
-    const selectedCard = cards.find(card => card.id === selectedCardId);
+    const selectedCard = cards.find((card) => card.id === selectedCardId);
     if (!selectedCard) {
-      alert("Seçili kart bulunamadı.");
+      alert("Selected card not found.");
       return;
     }
-    const selectedProducts = cart.filter(item => selectedItems.includes(item.id)).map(item => ({
-      product_id: item.id,
-      count: item.quantity,
-      detail: item.selectedOptions || ""
-    }));
+    const selectedProducts = cart
+      .filter((item) => selectedItems.includes(item.id))
+      .map((item) => ({
+        product_id: item.id,
+        count: item.quantity,
+        detail: item.selectedOptions || "",
+      }));
     const token = localStorage.getItem("token");
     const payload = {
       address_id: selectedAddressId,
@@ -267,65 +95,32 @@ function OrderPage(props) {
       products: selectedProducts,
     };
     try {
-      const response = await axios.post("https://workintech-fe-ecommerce.onrender.com/order", payload, {
-        headers: {
-          Authorization: token
-        }
-      });
+      const response = await axios.post(
+        "https://workintech-fe-ecommerce.onrender.com/order",
+        payload,
+        {
+          headers: {
+            Authorization: token,
+          },
+        },
+      );
       const orderedIds = selectedItems;
-      const newCart = cart.filter(item => !orderedIds.includes(item.id));
+      const newCart = cart.filter((item) => !orderedIds.includes(item.id));
       dispatch({ type: "SET_CART", payload: newCart });
-      alert("Sipariş başarıyla oluşturuldu!");
+      alert("Order placed successfully!");
       window.location.reload();
     } catch (error) {
-      alert("Sipariş oluşturulurken hata oluştu!");
-      console.error("Order error:", error);
+      alert("Error occurred while placing the order!");
     }
   };
 
-  /* 
- const token = localStorage.getItem("token"); // veya başka bir yerde tutuluyorsa oradan al
-  const addressId = 4;
- axios.delete(
-    `https://workintech-fe-ecommerce.onrender.com/user/address/${addressId}`,  
-    {
-      headers: {
-        Authorization: token
-      }
-    }
-  )
-  .then((response) => {
-    console.log("Adres verisi:", response.data);
-  })
-  .catch((error) => {
-    console.error("Adres verisi alınırken hata oluştu:", error);
-  });
-*/
+    useEffect(() => {
+    dispatch(fetchAddresses());
+  }, [dispatch]);
 
-  /*   axios.post(
-    "https://workintech-fe-ecommerce.onrender.com/user/address",
-    {
-      title: "Ev",
-      name: "kisi",
-      surname: "Yılmaz",
-      phone: "5555555555",
-      city: "İstanbul",
-      district: "Kadıköy",
-      neighborhood: "Moda",
-      address: "Sokak 1, No:2"
-    },
-    {
-      headers: {
-        Authorization: token
-      }
-    }
-  )
-  .then((response) => {
-    console.log("Adres verisi:", response.data);
-  })
-  .catch((error) => {
-    console.error("Adres verisi alınırken hata oluştu:", error);
-  }); */
+  useEffect(() => {
+    dispatch(fetchCards());
+  }, [dispatch]);
 
   return (
     <section className="flex justify-center font-montserrat items-center flex-col md:flex md:flex-row px-4 w-full">
@@ -360,7 +155,7 @@ function OrderPage(props) {
               <h1 className="py-4 px-12 text-[#252B42] flex flex-col font-montserrat font-bold text-2xl">
                 Order Page
               </h1>
-              <div className="gap-x-2 mt-2 flex justify-end w-[30%]">
+              <div className="gap-x-2 mt-2 flex justify-end w-[260px]">
                 <button
                   onClick={handleShowHideAddressForm}
                   className="border border-[#252B42] bg-[#252B42] w-[50%]  rounded-md h-7 text-white"
@@ -403,7 +198,7 @@ function OrderPage(props) {
                 <h1 className="py-4 px-12 text-[#252B42] flex flex-col font-montserrat font-bold text-2xl">
                   Card Info
                 </h1>
-                <div className="gap-x-2 mt-2 flex justify-end w-[30%]">
+                <div className="gap-x-2 mt-2 flex justify-end w-[260px]">
                   <button
                     onClick={handleShowHideCardForm}
                     className="border border-[#252B42] bg-[#252B42] w-[50%]  rounded-md h-7 text-white"
@@ -426,7 +221,10 @@ function OrderPage(props) {
                 <CreditCardForm />
               </section>
               <div id="cardsInfos">
-                <CreditCardInfos  selectedCardId={selectedCardId} setSelectedCardId={setSelectedCardId} />
+                <CreditCardInfos
+                  selectedCardId={selectedCardId}
+                  setSelectedCardId={setSelectedCardId}
+                />
               </div>
             </div>
           </div>
@@ -435,7 +233,7 @@ function OrderPage(props) {
 
       <div
         id="orderSummaryField"
-        className=" font-montserrat mt-5 flex flex-col "
+        className=" font-montserrat md:w-[20%] w-[100%] mt-5 flex flex-col "
       >
         <section className="border border-gray-300 gap-y-3 flex flex-col">
           <p className="p-4 ">ORDER SUMMARY</p>
@@ -476,44 +274,24 @@ function OrderPage(props) {
           </p>
         </div>
         {Array.isArray(cart) && cart.length !== 0 && (
-          <div className="gap-x-4 flex w-full justify-end px-2 py-4">
-              <form
-               onSubmit={handleSubmit(onOrderSubmit)}
-              action="">
-               <button
-               type="submit"
-              disabled={
-                !Array.isArray(selectedItems) || selectedItems.length === 0
-              }
-         
-              className={`border w-full border-[#252B42] p-2 rounded-lg ${
-                !Array.isArray(selectedItems) || selectedItems.length === 0
-                  ? "bg-gray-400 text-gray-700 cursor-not-allowed"
-                  : "bg-[#252B42] text-white"
-              }`}
-            >
-              Complete Purchase
-            </button>
-              </form>
-          
-           
+          <div className="gap-x-4 flex w-full justify-center px-2 py-4">
+            <form className="w-full flex justify-center" onSubmit={handleSubmit(onOrderSubmit)} action="">
+              <button
+                type="submit"
+                disabled={
+                  !Array.isArray(selectedItems) || selectedItems.length === 0
+                }
+                className={`border md:w-full w-[50%] border-[#252B42] p-2 rounded-lg ${
+                  !Array.isArray(selectedItems) || selectedItems.length === 0
+                    ? "bg-gray-400 text-gray-700 cursor-not-allowed"
+                    : "bg-[#252B42] text-white"
+                }`}
+              >
+                Complete Purchase
+              </button>
+            </form>
           </div>
         )}
-        {/* <button onClick={handleDeneme} className="border w-full border-[#252B42] p-2 rounded-lg bg-green-500 text-white">
-              deneme
-            </button> */}
-        <button
-          onClick={handleDeneme}
-          className="border w-full border-[#252B42] p-2 rounded-lg bg-green-500 text-white"
-        >
-          deneme
-        </button>
-        <button
-          onClick={handleDeneme2}
-          className="border w-full border-[#252B42] p-2 rounded-lg bg-green-500 text-white"
-        >
-          deneme2
-        </button>
       </div>
     </section>
   );

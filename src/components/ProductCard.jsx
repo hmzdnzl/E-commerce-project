@@ -2,18 +2,16 @@ import React from "react";
 import { Link } from "react-router-dom";
 import slugify from "slugify";
 
-// Kategori id'den kategori adı eşlemesi
+
 const categoryMap = {
   1: "tisort",
   2: "pantolon",
   3: "ayakkabi",
   4: "elbise",
-  // ...diğerleri
 };
 
 export default function ProductCard({ product, categoryName, gender }) {
   if (!product) return null;
-  // Eksikse mapping ve varsayılan değer kullan
   const mappedCategoryName = categoryName && categoryName !== '' ? categoryName : categoryMap[product.category_id] || 'unknown';
   const mappedGender = gender && gender !== '' ? gender : 'unisex';
   const productNameSlug = slugify(product.name || "");
